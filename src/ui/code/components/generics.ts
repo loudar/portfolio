@@ -1,6 +1,16 @@
 import {Tab} from "../models/Tab.ts";
 import {navigate} from "../routing/Router.ts";
-import {AnyElement, compute, create, nullElement, Signal, signalMap, StringOrSignal, when} from "@targoninc/jess";
+import {
+    AnyElement,
+    AnyNode,
+    compute,
+    create,
+    nullElement,
+    Signal,
+    signalMap,
+    StringOrSignal,
+    when
+} from "@targoninc/jess";
 
 export class Generics {
     static notFound() {
@@ -65,11 +75,15 @@ export class Generics {
             .build();
     }
 
-    static heading(level: number, text: StringOrSignal, classes: StringOrSignal[] = []) {
+    static heading(level: number, text: StringOrSignal, icon?: StringOrSignal, classes: StringOrSignal[] = []) {
         return create(`h${level}`)
-            .classes(...classes)
-            .text(text)
-            .build();
+            .classes("flex", "align-children", ...classes)
+            .children(
+                when(icon, Generics.icon(icon ?? "")),
+                create("span")
+                    .text(text)
+                    .build(),
+            ).build();
     }
 
     static table<T>(headers: StringOrSignal[], entries: Signal<T[]> | T[], rowTemplate: (entry: T) => AnyElement) {
@@ -147,28 +161,29 @@ export class Generics {
     static link(url: StringOrSignal, title: StringOrSignal, icon?: StringOrSignal) {
         let isRemote = false;
         if (typeof url === "string") {
-            isRemote = url.includes("http");
+            isRemote = url.includes(":");
         } else {
-            isRemote = url.value.includes("http");
+            isRemote = url.value.includes(":");
         }
 
-        return create("div")
+        return create("a")
             .classes("link-container", "flex", "align-children", "small-gap")
+            .href(url)
+            .target(isRemote ? "_blank" : "_self")
+            .onclick(e => {
+                if (!isRemote && e.button === 0) {
+                    e.preventDefault();
+                    if (typeof url === "string") {
+                        navigate(url);
+                    } else {
+                        navigate(url.value);
+                    }
+                }
+            })
             .children(
-                create("a")
-                    .href(url)
-                    .target(isRemote ? "_blank" : "_self")
+                create("span")
                     .text(title)
-                    .onclick(e => {
-                        if (!isRemote && e.button === 0) {
-                            e.preventDefault();
-                            if (typeof url === "string") {
-                                navigate(url);
-                            } else {
-                                navigate(url.value);
-                            }
-                        }
-                    }).build(),
+                    .build(),
                 when(icon, Generics.icon(icon ?? ""))
             ).build();
     }
@@ -184,11 +199,11 @@ export class Generics {
             .build();
     }
 
-    static employment(title: string, name: string, link: string, start: Date, end: Date) {
+    static employment(title: string, name: string, link: string, start: Date, end: Date, icon?: StringOrSignal) {
         return create("div")
             .classes("flex-v", "employment", "small-gap")
             .children(
-                Generics.heading(3, title),
+                Generics.heading(3, title, icon),
                 create("div")
                     .classes("flex", "space-between")
                     .children(
@@ -234,11 +249,11 @@ export class Generics {
             .build();
     }
 
-    static project(link: string, description: string, name: string) {
+    static project(link: string, description: string, name: string, overrideIcon?: StringOrSignal) {
         return create("div")
             .classes("flex", "space-between")
             .children(
-                Generics.link(link, name, "arrow_outward"),
+                Generics.link(link, name, overrideIcon ?? "arrow_outward"),
                 create("div")
                     .classes("line", "flex-grow")
                     .build(),
@@ -250,3 +265,16 @@ export class Generics {
     }
 }
 
+export function vertical(...children: AnyNode[]) {
+    return create("div")
+        .classes("flex-v")
+        .children(...children)
+        .build();
+}
+
+export function horizontal(...children: AnyNode[]) {
+    return create("div")
+        .classes("flex")
+        .children(...children)
+        .build();
+}

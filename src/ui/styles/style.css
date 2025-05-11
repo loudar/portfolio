@@ -72,10 +72,10 @@
 }
 
 .material-symbols-outlined {
-    font-variation-settings: 'FILL' 1,
+    font-variation-settings: 'FILL' 0,
     'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
+    'GRAD' -25,
+    'opsz' 22;
     font-family: 'Material Symbols Outlined';
     font-size: 1.1em !important;
     line-height: 1.2;
@@ -137,9 +137,13 @@ p, h1, h2, h3, h4, h5, h6 {
 h1 {
     font-size: 3rem;
     font-weight: 300;
-    border-left: .5em solid var(--red);
-    padding-left: .2em;
+    border-right: .5em solid var(--orange);
+    padding-right: .2em;
     line-height: 1;
+}
+
+h1 span {
+    margin-left: auto;
 }
 
 h2 {

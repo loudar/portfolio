@@ -1,4 +1,4 @@
-import {Generics} from "./generics.ts";
+import {Generics, horizontal} from "./generics.ts";
 import {create} from "@targoninc/jess";
 
 export class Home {
@@ -13,6 +13,7 @@ export class Home {
                     ...Home.company(),
                     ...Home.apps(),
                     ...Home.libraries(),
+                    ...Home.certificates(),
                     ...Home.employment(),
                 ).build(),
         );
@@ -21,8 +22,10 @@ export class Home {
     static contact() {
         return [
             Generics.heading(2, "Contact"),
-            Generics.link("https://bsky.app/profile/illegal.trading", "Bluesky", "arrow_outward"),
-            Generics.link("mailto://alex@targoninc.com", "E-Mail", "arrow_outward"),
+            horizontal(
+                Generics.link("https://bsky.app/profile/illegal.trading", "Bluesky", "alternate_email"),
+                Generics.link("mailto:alex@targoninc.com", "E-Mail", "send"),
+            )
         ];
     }
 
@@ -56,13 +59,21 @@ export class Home {
     static employment() {
         return [
             Generics.heading(2, "Employment history"),
-            Generics.employment("Software developer", "QUIBIQ Berlin GmbH", "https://www.quibiq.de/", new Date(2022, 3), new Date()),
+            Generics.employment("Software developer", "QUIBIQ Berlin GmbH", "https://www.quibiq.de/", new Date(2022, 3), new Date(), "code"),
             Generics.dot(),
-            Generics.employment("GIS work", "Bremen University of Applied Sciences", "https://www.hs-bremen.de/", new Date(2021, 7), new Date(2022, 2)),
+            Generics.employment("GIS work", "Bremen University of Applied Sciences", "https://www.hs-bremen.de/", new Date(2021, 7), new Date(2022, 2), "landscape_2_edit"),
             Generics.dot(),
-            Generics.employment("Multimedia assistant", "BREMER Blatt Verlags GmbH", "https://www.bremer.de/", new Date(2020, 8), new Date(2021, 11)),
+            Generics.employment("Multimedia assistant", "BREMER Blatt Verlags GmbH", "https://www.bremer.de/", new Date(2020, 8), new Date(2021, 11), "newspaper"),
             Generics.dot(),
-            Generics.employment("Retail employee", "REWE Group", "https://www.rewe.de/", new Date(2018, 7), new Date(2019, 5)),
+            Generics.employment("Retail employee", "REWE Group", "https://www.rewe.de/", new Date(2018, 7), new Date(2019, 5), "point_of_sale"),
         ];
+    }
+
+    static certificates() {
+        return [
+            Generics.heading(2, "Certificates"),
+            Generics.project("https://learn.microsoft.com/api/credentials/share/en-us/AlexanderFritsch-9309/88DF17DA6E811F4F?sharingId=E6C821E6251813B9", "Microsoft Certified", "Azure AI Engineer Associate", "license"),
+            Generics.project("https://learn.microsoft.com/api/credentials/share/en-us/AlexanderFritsch-9309/2784ABC91F604BDA?sharingId=E6C821E6251813B9", "Microsoft Certified", "Azure Developer Associate", "license"),
+        ]
     }
 }

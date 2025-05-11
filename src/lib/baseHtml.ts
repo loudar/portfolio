@@ -18,7 +18,7 @@ export async function baseHtml(req: Request) {
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     
     <!-- Material Symbols Filled -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/styles/style.css"/>
