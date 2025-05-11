@@ -23,7 +23,8 @@ export class Home {
         return [
             Generics.heading(2, "Contact"),
             horizontal(
-                Generics.link("https://bsky.app/profile/illegal.trading", "Bluesky", "alternate_email"),
+                Generics.link("https://bsky.app/profile/illegal.trading", "Bluesky", "/img/bluesky.svg"),
+                Generics.link("https://github.com/loudar", "Github", "/img/github.svg"),
                 Generics.link("mailto:alex@targoninc.com", "E-Mail", "send"),
             )
         ];

@@ -46,6 +46,10 @@ export class Generics {
 
     static icon(icon: StringOrSignal, classes: StringOrSignal[] = [], onclick: Function = () => {
     }) {
+        if (icon.constructor === String && (icon.includes("/") || icon.includes(":"))) {
+            return Generics.image(icon, [...classes, "icon-image"]);
+        }
+
         return create("i")
             .classes("material-symbols-outlined", ...classes)
             .text(icon)
