@@ -183,5 +183,70 @@ export class Generics {
             .text(text)
             .build();
     }
+
+    static employment(title: string, name: string, link: string, start: Date, end: Date) {
+        return create("div")
+            .classes("flex-v", "employment", "small-gap")
+            .children(
+                Generics.heading(3, title),
+                create("div")
+                    .classes("flex", "space-between")
+                    .children(
+                        Generics.link(link, name, "arrow_outward"),
+                        create("div")
+                            .classes("line", "flex-grow")
+                            .build(),
+                        Generics.dateSpan(start, end),
+                    ).build()
+            ).build();
+    }
+
+    private static dateSpan(start: Date, end: Date) {
+        const endIsToday = Date.now() - end.getTime() < 24 * 60 * 60 * 1000;
+
+        return create("div")
+            .classes("flex", "small-gap", "secondary")
+            .children(
+                when(endIsToday, create("span")
+                    .text("Since")
+                    .build()),
+                Generics.date(start),
+                when(endIsToday, create("span")
+                    .text("-")
+                    .build(), true),
+                when(endIsToday, Generics.date(end), true),
+            ).build();
+    }
+
+    static date(date: Date) {
+        const month = new Intl.DateTimeFormat("en-US", {
+            month: "long"
+        }).format(date);
+
+        return create("span")
+            .text(month + " " + date.getFullYear())
+            .build();
+    }
+
+    static dot() {
+        return create("div")
+            .classes("dot")
+            .build();
+    }
+
+    static project(link: string, description: string, name: string) {
+        return create("div")
+            .classes("flex", "space-between")
+            .children(
+                Generics.link(link, name, "arrow_outward"),
+                create("div")
+                    .classes("line", "flex-grow")
+                    .build(),
+                create("span")
+                    .classes("secondary")
+                    .text(description)
+                    .build(),
+            ).build();
+    }
 }
 

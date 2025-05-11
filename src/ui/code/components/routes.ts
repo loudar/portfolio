@@ -5,7 +5,7 @@ import {Generics} from "./generics.ts";
 export const routes: Route[] = [
     {
         path: "/",
-        title: "Home",
+        title: "Alexander Fritsch",
         aliases: ["home"],
         template: Home.page,
         icon: "home",

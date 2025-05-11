@@ -36,6 +36,8 @@
     --default-font-family: "Inter Tight", monospace;
 
     --radius: .25em;
+
+    --time: .1s;
 }
 
 * {
@@ -141,12 +143,14 @@ h1 {
 }
 
 h2 {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-top: .5em;
 }
 
 h3, h4, h5, h6 {
-    font-size: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 b, .bold {
@@ -233,16 +237,38 @@ table {
 }
 
 .link-container {
-    padding: 2px 4px;
+    padding: 2px 4px 2px 8px;
     background: var(--gray-1);
     max-width: max-content;
     cursor: pointer;
-    transition: transform 0.2s ease-in-out;
+    transition: transform var(--time) ease;
     --distance: 2px;
 }
 
 .link-container:hover {
     filter: invert(1);
     transform: translateX(var(--distance)) translateY(calc(-1 * var(--distance)));
-    box-shadow: calc(-1 * var(--distance)) var(--distance) 0 0 var(--yellow);
+    box-shadow: calc(-1 * var(--distance)) var(--distance) 5px 0 var(--gray-5);
+}
+
+.line {
+    border-bottom: 1px solid var(--gray-6);
+    margin: auto;
+}
+
+.dot {
+    --size: 3px;
+    width: var(--size);
+    height: var(--size);
+    background: var(--black);
+    margin: .25em 0;
+}
+
+.employment {
+    padding-left: .7em;
+    border-left: 3px solid var(--black);
+}
+
+.secondary {
+    color: var(--gray-6);
 }
