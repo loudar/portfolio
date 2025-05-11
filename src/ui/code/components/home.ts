@@ -25,6 +25,7 @@ export class Home {
             horizontal(
                 Generics.link("https://bsky.app/profile/illegal.trading", "Bluesky", "/img/bluesky.svg"),
                 Generics.link("https://github.com/loudar", "Github", "/img/github.svg"),
+                Generics.link("https://signal.me/#eu/eKJtXUYweDu1rxlutnJ7KAH5j3fgi2luKwTXb1GayW6JmWlveCxB35Kz16M-JNKY", "Signal", "/img/signal.svg"),
                 Generics.link("mailto:alex@targoninc.com", "E-Mail", "send"),
             )
         ];
