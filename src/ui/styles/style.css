@@ -260,6 +260,13 @@ table {
     margin: auto;
 }
 
+@media only screen and (max-width: 600px) {
+    .break-small {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
 .dot {
     --size: 3px;
     width: var(--size);

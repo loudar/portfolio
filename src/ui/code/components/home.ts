@@ -39,9 +39,10 @@ export class Home {
 
     static apps() {
         return [
-            Generics.heading(2, "Applications"),
+            Generics.heading(2, "Projects"),
             Generics.project("https://github.com/targoninc/botanika-desktop", "Desktop LLM client", "Botanika"),
             Generics.project("https://lyda.app", "Music service", "Lyda"),
+            //Generics.project("https://blog.blob.group", "IT-related thoughts", "Blog"),
         ];
     }
 

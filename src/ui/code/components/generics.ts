@@ -205,7 +205,7 @@ export class Generics {
             .children(
                 Generics.heading(3, title, icon),
                 create("div")
-                    .classes("flex", "space-between")
+                    .classes("flex", "break-small", "space-between")
                     .children(
                         Generics.link(link, name, "arrow_outward"),
                         create("div")
@@ -251,7 +251,7 @@ export class Generics {
 
     static project(link: string, description: string, name: string, overrideIcon?: StringOrSignal) {
         return create("div")
-            .classes("flex", "space-between")
+            .classes("flex", "break-small", "space-between")
             .children(
                 Generics.link(link, name, overrideIcon ?? "arrow_outward"),
                 create("div")
