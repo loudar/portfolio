@@ -1,6 +1,6 @@
 import {Tab} from "../models/Tab.ts";
 import {navigate} from "../routing/Router.ts";
-import {AnyElement, compute, create, nullElement, Signal, signalMap, StringOrSignal} from "@targoninc/jess";
+import {AnyElement, compute, create, nullElement, Signal, signalMap, StringOrSignal, when} from "@targoninc/jess";
 
 export class Generics {
     static notFound() {
@@ -144,7 +144,7 @@ export class Generics {
             .build();
     }
 
-    static link(url: StringOrSignal, title: StringOrSignal) {
+    static link(url: StringOrSignal, title: StringOrSignal, icon?: StringOrSignal) {
         let isRemote = false;
         if (typeof url === "string") {
             isRemote = url.includes("http");
@@ -153,13 +153,11 @@ export class Generics {
         }
 
         return create("div")
-            .classes("link-container")
+            .classes("link-container", "flex", "align-children", "small-gap")
             .children(
                 create("a")
-                    .classes("underline")
                     .href(url)
                     .target(isRemote ? "_blank" : "_self")
-                    .title(url)
                     .text(title)
                     .onclick(e => {
                         if (!isRemote && e.button === 0) {
@@ -170,7 +168,8 @@ export class Generics {
                                 navigate(url.value);
                             }
                         }
-                    }).build()
+                    }).build(),
+                when(icon, Generics.icon(icon ?? ""))
             ).build();
     }
 

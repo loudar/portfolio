@@ -32,7 +32,7 @@
     --small-gap: 5px;
     --layout-gap: 10px;
 
-    --base-font-size: 16px;
+    --base-font-size: 20px;
     --default-font-family: "Inter Tight", monospace;
 
     --radius: .25em;
@@ -82,11 +82,6 @@
 a {
     color: inherit;
     text-decoration: none;
-    font-size: inherit;
-}
-
-.underline {
-    text-decoration: underline;
 }
 
 .flex, .flex-v {
@@ -113,7 +108,7 @@ body {
     background: var(--white);
     color: var(--black);
     font-family: var(--default-font-family);
-    font-size: 16px;
+    font-size: var(--base-font-size);
     line-height: 1.5;
     margin: 0;
     padding: 0;
@@ -121,6 +116,10 @@ body {
 
 #content {
     height: 100dvh;
+    width: 800px;
+    max-width: 100dvw;
+    margin: auto;
+    padding-top: 5dvh;
 }
 
 .hidden {
@@ -134,12 +133,16 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 300;
+    border-left: .5em solid var(--red);
+    padding-left: .2em;
+    line-height: 1;
 }
 
 h2 {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-weight: 700;
 }
 
 h3, h4, h5, h6 {
@@ -182,7 +185,7 @@ b, .bold {
     background: var(--gray-2);
 }
 
-.center-items {
+.align-children {
     align-items: center;
 }
 
@@ -213,6 +216,10 @@ table {
     justify-content: space-between;
 }
 
+.small-gap {
+    gap: var(--small-gap);
+}
+
 .no-gap {
     gap: 0;
 }
@@ -223,4 +230,19 @@ table {
 
 .flex-grow {
     flex-grow: 1;
+}
+
+.link-container {
+    padding: 2px 4px;
+    background: var(--gray-1);
+    max-width: max-content;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    --distance: 2px;
+}
+
+.link-container:hover {
+    filter: invert(1);
+    transform: translateX(var(--distance)) translateY(calc(-1 * var(--distance)));
+    box-shadow: calc(-1 * var(--distance)) var(--distance) 0 0 var(--yellow);
 }

@@ -8,6 +8,8 @@ export class Home {
                 .classes("flex-v")
                 .children(
                     Generics.heading(1, "Alexander Fritsch"),
+                    Generics.heading(2, "Company"),
+                    Generics.link("https://targoninc.com", "Targon Industries UG", "arrow_outward"),
                 ).build(),
         );
     }
