@@ -7,4 +7,5 @@ export interface Route {
     template: Function;
     allowWithoutLogin?: boolean;
     showInNav?: boolean;
+    handler?: Function;
 }

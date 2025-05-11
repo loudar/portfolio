@@ -3,11 +3,11 @@ import {Route} from "./Route.ts";
 import {signal} from "@targoninc/jess";
 
 export class Router {
-    public currentRoute = signal<Route|null>(null);
+    public currentRoute = signal<Route|null|undefined>(null);
     public currentParams = signal<{
         [key: string]: string;
     }>({});
-    routes: any[];
+    public routes: Route[];
     protected preRouteChange: Function = () => {};
     protected postRouteChange: Function = () => {};
     protected onNoRouteFound: Function = () => {};
@@ -42,6 +42,13 @@ export class Router {
         this.currentRoute.value = route;
         currentRoute.value = route;
         if (route) {
+            if (route !== currentRoute.value) {
+                history.pushState({}, "", window.location.origin + path);
+            }
+
+            if (route.title) {
+                document.title = route.title;
+            }
             const params = this.getParams(path, route);
             this.currentParams.value = params;
             this.preRouteChange && await this.preRouteChange(route, params);
@@ -77,7 +84,6 @@ export class Router {
         if (!path.startsWith("/")) {
             path = "/" + path;
         }
-        history.pushState({}, "", window.location.origin + path);
         await this.handleRouteChange();
     }
 

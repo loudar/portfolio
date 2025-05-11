@@ -5,12 +5,9 @@ export class Home {
     static page() {
         return Generics.pageFrame(
             create("div")
-                .classes("flex-v", "center-items")
+                .classes("flex-v")
                 .children(
-                    create("h1")
-                        .classes("flex", "noflexwrap", "main-heading")
-                        .text("Home page")
-                        .build(),
+                    Generics.heading(1, "Alexander Fritsch"),
                 ).build(),
         );
     }

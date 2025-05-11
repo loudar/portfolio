@@ -1,15 +1,18 @@
-# tri-web
-
 To install dependencies:
 
 ```bash
-bun install
+bun i
 ```
 
-To run:
+To build:
 
 ```bash
-bun run index.ts
+bun run build-dev
 ```
 
-This project was created using `bun init` in bun v1.1.31. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+To start:
+
+```bash
+bun run start-dev
+```
+
