@@ -264,9 +264,29 @@ table {
     box-shadow: calc(-1 * var(--distance)) var(--distance) 5px 0 var(--gray-5);
 }
 
+.relative {
+    position: relative;
+}
+
+.timeline {
+    margin-bottom: 4em;
+}
+
+.line-employment {
+    position: absolute;
+    font-size: .6em;
+    transform-origin: left;
+    transform: rotate(20deg);
+    margin: 5px;
+}
+
 .line {
     border-bottom: 1px solid var(--gray-6);
     margin: auto;
+}
+
+.timeline .line {
+    margin: 0 5px 0 0;
 }
 
 @media only screen and (max-width: 600px) {
