@@ -1,4 +1,4 @@
-import {Generics, horizontal} from "./generics.ts";
+import {Generics, horizontal, vertical} from "./generics.ts";
 import {create} from "@targoninc/jess";
 import {Employment} from "./employment.ts";
 
@@ -28,8 +28,19 @@ export class Home {
                 Generics.link("https://github.com/loudar", "Github", "/img/github.svg"),
                 Generics.link("https://signal.me/#eu/eKJtXUYweDu1rxlutnJ7KAH5j3fgi2luKwTXb1GayW6JmWlveCxB35Kz16M-JNKY", "Signal", "/img/signal.svg"),
                 Generics.link("mailto:alex@targoninc.com", "E-Mail", "send"),
+            ),
+            Generics.heading(3, "Languages"),
+            vertical(
+                Generics.text("German"),
+                Generics.text("English"),
             )
         ];
+    }
+
+    static skills() {
+        return [
+
+        ]
     }
 
     static company() {
