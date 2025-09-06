@@ -23,9 +23,9 @@ export class Home {
         return [
             Generics.heading(2, "Contact"),
             horizontal(
-                Generics.link("https://bsky.app/profile/illegal.trading", "Bluesky", "/img/bluesky.svg"),
-                Generics.link("https://github.com/loudar", "Github", "/img/github.svg"),
-                Generics.link("https://signal.me/#eu/eKJtXUYweDu1rxlutnJ7KAH5j3fgi2luKwTXb1GayW6JmWlveCxB35Kz16M-JNKY", "Signal", "/img/signal.svg"),
+                Generics.link("https://bsky.app/profile/illegal.trading", "Bluesky", "/img/bluesky.png"),
+                Generics.link("https://github.com/loudar", "Github", "/img/github.png"),
+                Generics.link("https://signal.me/#eu/eKJtXUYweDu1rxlutnJ7KAH5j3fgi2luKwTXb1GayW6JmWlveCxB35Kz16M-JNKY", "Signal", "/img/signal.png"),
                 Generics.link("mailto:alex@targoninc.com", "E-Mail", "send"),
             )
         ];
@@ -42,7 +42,6 @@ export class Home {
     static apps() {
         return [
             Generics.heading(2, "Projects"),
-            Generics.project("https://github.com/targoninc/botanika-desktop", "Desktop LLM client", "Botanika"),
             Generics.project("https://lyda.app", "Music service", "Lyda"),
             //Generics.project("https://blog.blob.group", "IT-related thoughts", "Blog"),
         ];
