@@ -37,12 +37,6 @@ export class Home {
         ];
     }
 
-    static skills() {
-        return [
-
-        ]
-    }
-
     static company() {
         return [
             Generics.heading(2, "Company"),
