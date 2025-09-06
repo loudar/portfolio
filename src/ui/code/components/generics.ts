@@ -192,6 +192,12 @@ export class Generics {
             ).build();
     }
 
+    static text(text: string) {
+        return create("span")
+            .text(text)
+            .build();
+    }
+
     static divider() {
         return create("hr")
             .build();
