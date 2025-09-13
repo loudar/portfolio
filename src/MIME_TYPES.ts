@@ -8,4 +8,6 @@ export const MIME_TYPES: { [extension: string]: string } = {
     jpeg: "image/jpeg",
     svg: "image/svg+xml",
     ico: "image/x-icon",
+    vcf: "text/vcard",
+    vcard: "text/vcard",
 };

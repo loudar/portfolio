@@ -1,0 +1,18 @@
+BEGIN:VCARD
+VERSION:4.0
+CLASS:public
+KIND:individual
+LANG:de;en
+FN:Alexander Fritsch
+ORG:Targon Industries
+NICKNAME:Alex
+EMAIL:alex@targoninc.com
+BDAY:19991007
+TZ:Europe/Berlin
+CATEGORIES:developer,musician
+MAILER:Thunderbird
+NOTE:If you read this, you're probably really cool
+SOURCE:https://illegal.trading/alex.vcf
+URL;TITLE:https://illegal.trading
+REV:20250913
+END:VCARD
