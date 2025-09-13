@@ -7,10 +7,14 @@ FN:Alexander Fritsch
 ORG:Targon Industries
 NICKNAME:Alex
 EMAIL:alex@targoninc.com
+PRONOUNS;LANGUAGE=en;PREF=1:he/him
+PRONOUNS;LANGUAGE=en;PREF=2:they/them
+MAILER:Thunderbird
+SOCIALPROFILE;SERVICE-TYPE=ATProto:https://bsky.app/profile/illegal.trading
+SOCIALPROFILE;SERVICE-TYPE=Lyda:https://lyda.app/loudar
 BDAY:19991007
 TZ:Europe/Berlin
 CATEGORIES:developer,musician
-MAILER:Thunderbird
 NOTE:If you read this, you're probably really cool
 SOURCE:https://illegal.trading/alex.vcf
 URL;TITLE:https://illegal.trading
