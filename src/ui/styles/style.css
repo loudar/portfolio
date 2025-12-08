@@ -269,7 +269,11 @@ table {
 }
 
 .timeline {
-    margin-bottom: 4em;
+    padding: 10px;
+    border: 1px solid var(--gray-3);
+    height: 7em;
+    border-radius: var(--radius);
+    background: var(--gray-1);
 }
 
 .line-employment {
@@ -281,7 +285,7 @@ table {
 }
 
 .line {
-    border-bottom: 1px solid var(--gray-6);
+    border-top: 1px solid var(--gray-6);
     margin: auto;
 }
 

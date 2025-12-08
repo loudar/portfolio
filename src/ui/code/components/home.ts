@@ -142,8 +142,7 @@ export class Home {
                     return create("div")
                         .classes("line")
                         .styles("width", `calc(${partial * 100}% - 5px)`)
-                        .styles("opacity", Math.max(.5, i / employments.length).toString())
-                        .styles("border-bottom-width", `${Math.ceil(partial * 5)}px`)
+                        .styles("border-top-width", `${Math.ceil(partial * 5)}px`)
                         .children(
                             create("span")
                                 .classes("line-employment")
