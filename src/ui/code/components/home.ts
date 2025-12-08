@@ -119,6 +119,7 @@ export class Home {
     static certificates() {
         return [
             Generics.heading(2, "Certificates"),
+            Generics.project("https://certificates.dev/angular/certificates/a0722815-356e-4f13-9d1d-94c8a1d2e4b6", "Certificates.dev", "Junior Angular Developer", "license"),
             Generics.project("https://learn.microsoft.com/api/credentials/share/en-us/AlexanderFritsch-9309/88DF17DA6E811F4F?sharingId=E6C821E6251813B9", "Microsoft Certified", "Azure AI Engineer Associate", "license"),
             Generics.project("https://learn.microsoft.com/api/credentials/share/en-us/AlexanderFritsch-9309/2784ABC91F604BDA?sharingId=E6C821E6251813B9", "Microsoft Certified", "Azure Developer Associate", "license"),
             Generics.project("https://learn.microsoft.com/api/credentials/share/de-de/AlexanderFritsch-9309/A8CC6ACA3540BC60?sharingId=E6C821E6251813B9", "Microsoft Certified", "DevOps Engineer Expert", "license"),
