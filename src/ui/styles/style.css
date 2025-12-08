@@ -272,7 +272,6 @@ table {
     padding: 10px;
     border: 1px solid var(--gray-3);
     height: 7em;
-    border-radius: var(--radius);
     background: var(--gray-1);
 }
 
