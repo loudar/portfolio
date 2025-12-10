@@ -304,11 +304,12 @@ table {
     width: var(--size);
     height: var(--size);
     background: var(--black);
-    margin: .25em 0;
+    margin: auto;
 }
 
 .employment {
-    padding-left: .7em;
+    padding: .7em;
+    border: 1px solid var(--gray-2);
     border-left: 3px solid var(--black);
 }
 
