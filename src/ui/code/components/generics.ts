@@ -223,12 +223,16 @@ export class Generics {
                 create("div")
                     .classes("flex", "small-gap")
                     .children(
-                        ...skills.map(skill => create("span")
-                            .classes("skill")
-                            .text(skill)
-                            .build())
+                        ...skills.map(Generics.skill)
                     ).build()
             ).build();
+    }
+
+    static skill(text: string) {
+        return create("span")
+            .classes("skill")
+            .text(text)
+            .build();
     }
 
     private static dateSpan(start: Date, end: Date) {
@@ -283,13 +287,11 @@ export class Generics {
 export function vertical(...children: AnyNode[]) {
     return create("div")
         .classes("flex-v")
-        .children(...children)
-        .build();
+        .children(...children);
 }
 
 export function horizontal(...children: AnyNode[]) {
     return create("div")
         .classes("flex")
-        .children(...children)
-        .build();
+        .children(...children);
 }

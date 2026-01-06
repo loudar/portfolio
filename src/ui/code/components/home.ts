@@ -30,11 +30,11 @@ export class Home {
                 Generics.link("https://signal.me/#eu/eKJtXUYweDu1rxlutnJ7KAH5j3fgi2luKwTXb1GayW6JmWlveCxB35Kz16M-JNKY", "Signal", "/img/signal.png"),
                 Generics.link("mailto:alex@targoninc.com", "E-Mail", "send"),
             ),
-            Generics.heading(3, "Languages"),
-            vertical(
-                Generics.text("German"),
-                Generics.text("English"),
-            )
+            Generics.heading(2, "Languages"),
+            horizontal(
+                Generics.skill("German"),
+                Generics.skill("English"),
+            ).classes("small-gap")
         ];
     }
 
