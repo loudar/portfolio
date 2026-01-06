@@ -73,6 +73,7 @@ export class Home {
                 url: "https://www.quibiq.de/",
                 start: new Date(2022, 3),
                 end: new Date(),
+                skills: ["C#/.NET", "Angular", "Azure", "SQL Server", "DevOps", "Docker", "TypeScript", "NgRx"],
                 icon: "code"
             },
             {
@@ -81,6 +82,7 @@ export class Home {
                 url: "https://www.hs-bremen.de/",
                 start: new Date(2021, 7),
                 end: new Date(2022, 2),
+                skills: ["Python", "vGIS", "ArcGIS"],
                 icon: "landscape_2_edit"
             },
             {
@@ -89,6 +91,7 @@ export class Home {
                 url: "https://www.bremer.de/",
                 start: new Date(2020, 8),
                 end: new Date(2021, 11),
+                skills: ["Photoshop", "Wordpress", "QuarkXPress"],
                 icon: "newspaper"
             },
             {
@@ -97,6 +100,7 @@ export class Home {
                 url: "https://www.rewe.de/",
                 start: new Date(2019, 7),
                 end: new Date(2020, 5),
+                skills: ["Customer service", "Cash register"],
                 icon: "newspaper"
             }
         ].sort((a, b) => b.end.getTime() - a.end.getTime());
@@ -106,11 +110,11 @@ export class Home {
             Home.timeline(employments),
             ...employments.flatMap((e, i) => {
                 if (i === employments.length - 1) {
-                    return [Generics.employment(e.title, e.company, e.url, e.start, e.end)];
+                    return [Generics.employment(e.title, e.company, e.url, e.skills, e.start, e.end)];
                 }
 
                 return [
-                    Generics.employment(e.title, e.company, e.url, e.start, e.end),
+                    Generics.employment(e.title, e.company, e.url, e.skills, e.start, e.end),
                     Generics.dot()
                 ];
             }),

@@ -209,19 +209,24 @@ export class Generics {
             .build();
     }
 
-    static employment(title: string, name: string, link: string, start: Date, end: Date, icon?: StringOrSignal) {
+    static employment(title: string, name: string, link: string, skills: string[], start: Date, end: Date, icon?: StringOrSignal) {
         return create("div")
             .classes("flex-v", "employment", "small-gap")
             .children(
-                Generics.heading(3, title, icon),
+                Generics.dateSpan(start, end),
                 create("div")
-                    .classes("flex", "break-small", "space-between")
+                    .classes("flex", "break-small")
                     .children(
+                        Generics.heading(3, title + " @", icon),
                         Generics.link(link, name, "arrow_outward"),
-                        create("div")
-                            .classes("line", "flex-grow")
-                            .build(),
-                        Generics.dateSpan(start, end),
+                    ).build(),
+                create("div")
+                    .classes("flex", "small-gap")
+                    .children(
+                        ...skills.map(skill => create("span")
+                            .classes("skill")
+                            .text(skill)
+                            .build())
                     ).build()
             ).build();
     }

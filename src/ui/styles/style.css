@@ -320,3 +320,11 @@ table {
 .secondary {
     color: var(--gray-6);
 }
+
+.skill {
+    padding: .2em .7em;
+    background: var(--gray-1);
+    font-size: .8em;
+    border-radius: var(--radius);
+    height: max-content;
+}

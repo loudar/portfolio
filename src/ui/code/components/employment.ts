@@ -4,5 +4,6 @@ export interface Employment {
     url: string;
     start: Date;
     end: Date;
-    icon: string
+    icon: string;
+    skills: string[];
 }
