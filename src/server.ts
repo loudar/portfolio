@@ -13,6 +13,8 @@ console.log(process.cwd());
 const outDir = path.join(process.cwd(), "out");
 const uiDir = path.join(process.cwd(), "src/ui");
 
+const ipRequestCount: Record<string, number> = {};
+
 const getMimeType = (filepath: string): string => {
     const getFileExtension = (path: string): string =>
         path.split('.').pop()?.toLowerCase() || "";
@@ -85,7 +87,13 @@ const server = serve({
             const hitsData = getHitsData();
             const html = await baseHtml(req, hitsData);
             if (isHit) {
-                addHit().then(() => console.log(`+HIT\t[${req.method}] ${req.url}\t${ip}`));
+                const count = (ipRequestCount[ip] || 0) + 1;
+                if (count <= 10) {
+                    addHit().then(() => console.log(`+HIT\t[${req.method}] ${req.url}\t${ip} (Hits: ${count})`));
+                } else {
+                    console.log(`NOHIT (limit reached)\t[${req.method}] ${req.url}\t${ip}`);
+                }
+                ipRequestCount[ip] = count;
             }
             return new Response(html, { headers: { "Content-Type": "text/html" } });
         } catch (error) {
