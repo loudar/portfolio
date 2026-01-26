@@ -56,7 +56,8 @@ const server = serve({
         try {
             const html = await baseHtml(req, hits);
             if (!req.url.includes("favicon")) {
-                addHit().then(() => console.log(`Hits: ${hits}\t[${req.method}] ${req.url}`));
+                const ip = req.headers.get("x-forwarded-for") || req.headers.get("cf-connecting-ip") || "unknown";
+                addHit().then(() => console.log(`Hits: ${hits}\t[${req.method}] ${req.url}\t${ip}`));
             }
             return new Response(html, { headers: { "Content-Type": "text/html" } });
         } catch (error) {
