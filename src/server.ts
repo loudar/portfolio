@@ -64,7 +64,7 @@ const server = serve({
         }
 
         const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "unknown";
-        if (!isHit) {
+        if (!isHit && !req.url.includes("img")) {
             console.log(`->\t[${req.method}] ${req.url}\t${ip}`);
         }
 
