@@ -170,6 +170,7 @@ export class Home {
                 Generics.webbutton("wbtn/thermia.gif", "https://girlthi.ng/~thermia/"),
                 Generics.webbutton("wbtn/zaire.gif", "https://supitszaire.com/"),
                 Generics.webbutton("wbtn/elke.gif", "https://elke.cafe/"),
+                Generics.webbutton("wbtn/holly.png", "https://holly.mlem.systems/"),
             ),
             Generics.heading(2, "More buttons"),
             horizontal(
