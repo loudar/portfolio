@@ -17,6 +17,7 @@ export class Home {
                     ...Home.libraries(),
                     ...Home.certificates(),
                     ...Home.employment(),
+                    Home.webbuttons(),
                 ).build(),
         );
     }
@@ -68,7 +69,7 @@ export class Home {
     static employment() {
         const employments: Employment[] = [
             {
-                title: "Software developer",
+                title: "Lead Software developer",
                 company: "QUIBIQ Berlin GmbH",
                 url: "https://www.quibiq.de/",
                 start: new Date(2022, 3),
@@ -156,5 +157,31 @@ export class Home {
                         ).build();
                 })
             ).build();
+    }
+
+    private static webbuttons() {
+        return vertical(
+            Generics.heading(2, "Buttons"),
+            horizontal(
+                Generics.webbutton("webbutton.png", "https://illegal.trading"),
+                Generics.webbutton("wbtn/ari.gif", "https://arimelody.space/"),
+                Generics.webbutton("wbtn/mae.png", "https://mae.wtf/"),
+                Generics.webbutton("wbtn/thermia.gif", "https://girlthi.ng/~thermia/"),
+                Generics.webbutton("wbtn/zaire.gif", "https://supitszaire.com/"),
+                Generics.webbutton("wbtn/elke.gif", "https://elke.cafe/"),
+            ),
+            Generics.heading(2, "More buttons"),
+            horizontal(
+                Generics.webbutton("wbtn2/debian.org.gif", "https://debian.org/"),
+                Generics.webbutton("wbtn2/learn_html.gif"),
+                Generics.webbutton("wbtn2/void.png"),
+                Generics.webbutton("wbtn2/antinazi.gif"),
+                Generics.webbutton("wbtn2/buttons_now.gif"),
+                Generics.webbutton("wbtn2/freesounds.gif", "https://lyda.app"),
+                Generics.webbutton("wbtn2/no.gif", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"),
+                Generics.webbutton("wbtn2/transnow2.gif"),
+                Generics.webbutton("wbtn2/www.gif", "https://wikiroulette.co/"),
+            )
+        );
     }
 }

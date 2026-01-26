@@ -328,3 +328,8 @@ table {
     border-radius: var(--radius);
     height: max-content;
 }
+
+.webbutton {
+    height: 31px;
+    width: 88px;
+}

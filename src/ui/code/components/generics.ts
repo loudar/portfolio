@@ -282,6 +282,25 @@ export class Generics {
                     .build(),
             ).build();
     }
+
+    static webbutton(img: string, url?: string) {
+        if (!url) {
+            return create("img")
+                .classes("webbutton")
+                .src(`img/${img}`)
+                .build();
+        }
+
+        return create("a")
+            .href(url)
+            .target("_blank")
+            .children(
+                create("img")
+                    .classes("webbutton")
+                    .src(`/img/${img}`)
+                    .build(),
+            ).build();
+    }
 }
 
 export function vertical(...children: AnyNode[]) {
