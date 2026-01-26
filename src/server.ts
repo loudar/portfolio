@@ -53,12 +53,18 @@ function saveHitsData(data: Record<string, number>) {
 const server = serve({
     port: parseInt(process.env.PORT || "3000"),
     async fetch(req) {
+        const url = new URL(req.url);
+        const pathname = url.pathname;
+        const isHit = !req.url.includes("favicon") && !pathname.includes(".") && req.method === "GET";
+
         if (req.method === "OPTIONS") {
             return new Response(null, { status: 204 });
         }
 
-        const url = new URL(req.url);
-        const pathname = url.pathname;
+        const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "unknown";
+        if (!isHit) {
+            console.log(`->\t[${req.method}] ${req.url}\t${ip}`);
+        }
 
         // Handle static files from "out" and "src/ui" directories
         const staticFiles = [outDir, uiDir];
@@ -78,9 +84,8 @@ const server = serve({
         try {
             const hitsData = getHitsData();
             const html = await baseHtml(req, hitsData);
-            if (!req.url.includes("favicon") && !pathname.includes(".")) {
-                const ip = req.headers.get("x-forwarded-for") || req.headers.get("cf-connecting-ip") || "unknown";
-                addHit().then(() => console.log(`Hit added\t[${req.method}] ${req.url}\t${ip}`));
+            if (isHit) {
+                addHit().then(() => console.log(`+HIT\t[${req.method}] ${req.url}\t${ip}`));
             }
             return new Response(html, { headers: { "Content-Type": "text/html" } });
         } catch (error) {
