@@ -196,9 +196,10 @@ export class Home {
 
         const today = new Date().toISOString().split("T")[0];
         const todayHits = hitsData[today] ?? 0;
+        const displayDays = 14;
 
         const dates = Object.keys(hitsData).sort();
-        const values = dates.map(d => hitsData[d]);
+        const values = dates.slice(-displayDays).map(d => hitsData[d]);
         const maxHits = Math.max(...values, 1);
 
         return horizontal(
@@ -227,12 +228,17 @@ export class Home {
                     create("div")
                         .classes("hit-graph", "flex", "no-gap")
                         .children(
-                            ...values.slice(-14).map(v =>
-                                create("div")
+                            ...values.map((v, index) => {
+                                const daysOffset = (values.length - 1) - index;
+                                const offsetInMs = daysOffset * 24 * 60 * 60 * 1000;
+                                const date = new Date(Date.now() - offsetInMs);
+
+                                return create("div")
                                     .classes("graph-bar")
                                     .styles("height", `${(v / maxHits) * 20}px`)
-                                    .build()
-                            )
+                                    .title(`${date.toLocaleDateString()}\r\n${v} hits`)
+                                    .build();
+                            })
                         ).build()
                 )
         );
