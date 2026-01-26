@@ -199,7 +199,7 @@ export class Home {
                         .text(`Page hits`)
                         .build(),
                     create("span")
-                        .classes("counter")
+                        .classes("counter", (parseInt(hits) % 1000 === 0) ? "special" : "_")
                         .text(hits)
                         .build(),
                 )
