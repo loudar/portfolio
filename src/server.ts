@@ -20,7 +20,7 @@ const getMimeType = (filepath: string): string => {
     return MIME_TYPES[extension] || "text/plain";
 };
 
-const hitsTxtPath = "/hits.txt";
+const hitsTxtPath = "/portfolio/hits.txt";
 const hitsFilePath = path.join(process.cwd(), hitsTxtPath);
 if (!fs.existsSync(hitsFilePath)) {
     fs.writeFileSync(hitsFilePath, "0");
