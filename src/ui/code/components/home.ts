@@ -191,8 +191,8 @@ export class Home {
         const hitsMeta = document.querySelector(`meta[property="hits"]`);
         const hits = hitsMeta?.getAttribute("content") ?? "0";
 
-        return create("span")
-            .text(`Page hits: ${hits}`)
-            .build();
+        return horizontal(
+            Generics.skill(`Page hits: ${hits}`)
+        );
     }
 }
