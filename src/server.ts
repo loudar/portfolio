@@ -21,12 +21,11 @@ const getMimeType = (filepath: string): string => {
 };
 
 const hitsTxtPath = "/portfolio/hits.txt";
-const hitsFilePath = path.join(process.cwd(), hitsTxtPath);
-if (!fs.existsSync(hitsFilePath)) {
-    fs.writeFileSync(hitsFilePath, "0");
+if (!fs.existsSync(hitsTxtPath)) {
+    fs.writeFileSync(hitsTxtPath, "0");
 }
 
-let hits = parseInt(fs.readFileSync(hitsFilePath, "utf-8"));
+let hits = parseInt(fs.readFileSync(hitsTxtPath, "utf-8"));
 
 // Bun server handler
 const server = serve({
@@ -69,7 +68,7 @@ const server = serve({
 
 async function addHit() {
     hits++;
-    await writeFile(hitsFilePath, hits.toString());
+    await writeFile(hitsTxtPath, hits.toString());
 }
 
 console.log(`Server is running on http://localhost:${server.port}`);
