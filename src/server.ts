@@ -51,7 +51,7 @@ const server = serve({
 
         // Handle dynamic routes (fallback to baseHtml render)
         try {
-            const html = await baseHtml(req);
+            const html = await baseHtml(req, hits);
             addHit().then(() => console.log(`Hits: ${hits}`));
             return new Response(html, { headers: { "Content-Type": "text/html" } });
         } catch (error) {

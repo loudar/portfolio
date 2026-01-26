@@ -1,4 +1,4 @@
-export async function baseHtml(req: Request) {
+export async function baseHtml(req: Request, hits: number) {
     return `<!DOCTYPE html>
 <html lang="en">
 <head id="header">
@@ -31,6 +31,7 @@ export async function baseHtml(req: Request) {
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="${process.env.SITE_NAME}"/>
     <meta property="og:description" content="${process.env.SITE_DESCRIPTION}"/>
+    <meta property="hits" content="${hits}"/>
     <script src="/main.js" type="module"></script>
 </head>
 <body>

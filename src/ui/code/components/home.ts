@@ -18,6 +18,7 @@ export class Home {
                     ...Home.certificates(),
                     ...Home.employment(),
                     Home.webbuttons(),
+                    Home.hits(),
                 ).build(),
         );
     }
@@ -183,5 +184,14 @@ export class Home {
                 Generics.webbutton("wbtn2/www.gif", "https://wikiroulette.co/"),
             )
         );
+    }
+
+    private static hits() {
+        const hitsMeta = document.querySelector(`meta[property="hits"]`);
+        const hits = hitsMeta?.getAttribute("content") ?? "0";
+
+        return create("span")
+            .text(`Page hits: ${hits}`)
+            .build();
     }
 }
