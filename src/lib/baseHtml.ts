@@ -1,4 +1,5 @@
-export async function baseHtml(req: Request, hits: number) {
+export async function baseHtml(req: Request, hitsData: Record<string, number>) {
+    const hits = Object.values(hitsData).reduce((a, b) => a + b, 0);
     return `<!DOCTYPE html>
 <html lang="en">
 <head id="header">
@@ -28,6 +29,7 @@ export async function baseHtml(req: Request, hits: number) {
     <meta property="og:title" content="${process.env.SITE_NAME}"/>
     <meta property="og:description" content="${process.env.SITE_DESCRIPTION}"/>
     <meta property="hits" content="${hits}"/>
+    <meta property="hits-data" content='${JSON.stringify(hitsData)}'/>
     <script src="/main.js" type="module"></script>
 </head>
 <body>

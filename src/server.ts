@@ -24,10 +24,30 @@ const isDev = !fs.existsSync("/portfolio");
 
 const hitsTxtPath = isDev ? path.join(process.cwd(), "hits.txt") : "/portfolio/hits.txt";
 if (!fs.existsSync(hitsTxtPath)) {
-    fs.writeFileSync(hitsTxtPath, "0");
+    fs.writeFileSync(hitsTxtPath, "");
 }
 
-let hits = parseInt(fs.readFileSync(hitsTxtPath, "utf-8"));
+function getHitsData(): Record<string, number> {
+    const content = fs.readFileSync(hitsTxtPath, "utf-8");
+    const lines = content.split("\n").filter(line => line.trim() !== "");
+    const data: Record<string, number> = {};
+    for (const line of lines) {
+        if (!line.includes(";")) continue;
+        const [date, count] = line.split(";");
+        const parsedCount = parseInt(count);
+        if (!isNaN(parsedCount)) {
+            data[date] = parsedCount;
+        }
+    }
+    return data;
+}
+
+function saveHitsData(data: Record<string, number>) {
+    const lines = Object.entries(data)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([date, count]) => `${date};${count}`);
+    fs.writeFileSync(hitsTxtPath, lines.join("\n"));
+}
 
 // Bun server handler
 const server = serve({
@@ -56,10 +76,11 @@ const server = serve({
 
         // Handle dynamic routes (fallback to baseHtml render)
         try {
-            const html = await baseHtml(req, hits);
-            if (!req.url.includes("favicon")) {
+            const hitsData = getHitsData();
+            const html = await baseHtml(req, hitsData);
+            if (!req.url.includes("favicon") && !pathname.includes(".")) {
                 const ip = req.headers.get("x-forwarded-for") || req.headers.get("cf-connecting-ip") || "unknown";
-                addHit().then(() => console.log(`Hits: ${hits}\t[${req.method}] ${req.url}\t${ip}`));
+                addHit().then(() => console.log(`Hit added\t[${req.method}] ${req.url}\t${ip}`));
             }
             return new Response(html, { headers: { "Content-Type": "text/html" } });
         } catch (error) {
@@ -70,8 +91,10 @@ const server = serve({
 });
 
 async function addHit() {
-    hits++;
-    await writeFile(hitsTxtPath, hits.toString());
+    const today = new Date().toISOString().split("T")[0];
+    const data = getHitsData();
+    data[today] = (data[today] || 0) + 1;
+    saveHitsData(data);
 }
 
 console.log(`Server is running on http://localhost:${server.port}`);

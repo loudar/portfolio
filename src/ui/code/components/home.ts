@@ -188,20 +188,52 @@ export class Home {
     }
 
     private static hits() {
-        const hitsMeta = document.querySelector(`meta[property="hits"]`);
-        const hits = hitsMeta?.getAttribute("content") ?? "0";
+        const totalHitsMeta = document.querySelector(`meta[property="hits"]`);
+        const hitsDataMeta = document.querySelector(`meta[property="hits-data"]`);
+
+        const totalHits = totalHitsMeta?.getAttribute("content") ?? "0";
+        const hitsData: Record<string, number> = JSON.parse(hitsDataMeta?.getAttribute("content") ?? "{}");
+
+        const today = new Date().toISOString().split("T")[0];
+        const todayHits = hitsData[today] ?? 0;
+
+        const dates = Object.keys(hitsData).sort();
+        const values = dates.map(d => hitsData[d]);
+        const maxHits = Math.max(...values, 1);
 
         return horizontal(
             create("div")
                 .classes("skill", "flex", "align-children", "hits")
                 .children(
-                    create("span")
-                        .text(`Page hits`)
+                    horizontal(
+                        create("span")
+                            .text(`Page hits`)
+                            .build(),
+                        create("span")
+                            .classes("counter", (parseInt(totalHits) % 1000 === 0) ? "special" : "_")
+                            .text(totalHits)
+                            .build(),
+                    ).classes("align-children")
                         .build(),
-                    create("span")
-                        .classes("counter", (parseInt(hits) % 1000 === 0) ? "special" : "_")
-                        .text(hits)
-                        .build(),
+                    horizontal(
+                        create("span")
+                            .text(`Today`)
+                            .build(),
+                        create("span")
+                            .classes("counter")
+                            .text(todayHits.toString())
+                            .build(),
+                    ).classes("align-children").build(),
+                    create("div")
+                        .classes("hit-graph", "flex", "no-gap")
+                        .children(
+                            ...values.slice(-14).map(v =>
+                                create("div")
+                                    .classes("graph-bar")
+                                    .styles("height", `${(v / maxHits) * 20}px`)
+                                    .build()
+                            )
+                        ).build()
                 )
         );
     }
