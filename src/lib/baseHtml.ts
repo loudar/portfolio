@@ -22,10 +22,6 @@ export async function baseHtml(req: Request, hits: number) {
     
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/styles/style.css"/>
-    
-    <!-- Icons -->
-    <link rel="apple-touch-icon" href="/images/LOGO128.png">
-    <link rel="icon" href="/images/LOGO.svg" sizes="128x128">
 
     <!-- OG Tags -->
     <meta property="og:type" content="website"/>

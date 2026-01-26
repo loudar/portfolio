@@ -192,7 +192,17 @@ export class Home {
         const hits = hitsMeta?.getAttribute("content") ?? "0";
 
         return horizontal(
-            Generics.skill(`Page hits: ${hits}`)
+            create("div")
+                .classes("skill", "flex", "align-children", "hits")
+                .children(
+                    create("span")
+                        .text(`Page hits`)
+                        .build(),
+                    create("span")
+                        .classes("counter")
+                        .text(hits)
+                        .build(),
+                )
         );
     }
 }

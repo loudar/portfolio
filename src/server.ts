@@ -32,6 +32,10 @@ let hits = parseInt(fs.readFileSync(hitsFilePath, "utf-8"));
 const server = serve({
     port: parseInt(process.env.PORT || "3000"),
     async fetch(req) {
+        if (req.method === "OPTIONS") {
+            return new Response(null, { status: 204 });
+        }
+
         const url = new URL(req.url);
         const pathname = url.pathname;
 
@@ -52,7 +56,9 @@ const server = serve({
         // Handle dynamic routes (fallback to baseHtml render)
         try {
             const html = await baseHtml(req, hits);
-            addHit().then(() => console.log(`Hits: ${hits}`));
+            if (!req.url.includes("favicon")) {
+                addHit().then(() => console.log(`Hits: ${hits}\t[${req.method}] ${req.url}`));
+            }
             return new Response(html, { headers: { "Content-Type": "text/html" } });
         } catch (error) {
             console.error("Error rendering HTML:", error);
@@ -63,7 +69,6 @@ const server = serve({
 
 async function addHit() {
     hits++;
-    // write asynchronously to file
     await writeFile(hitsFilePath, hits.toString());
 }
 

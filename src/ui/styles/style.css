@@ -333,3 +333,17 @@ table {
     height: 31px;
     width: 88px;
 }
+
+.hits {
+    margin: auto;
+}
+
+.counter {
+    font-family: monospace;
+    font-size: .8em;
+    letter-spacing: 0.05em;
+    color: var(--green);
+    background: black;
+    padding: 0 4px;
+    border-radius: var(--radius);
+}
