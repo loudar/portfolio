@@ -3,6 +3,8 @@ import {baseHtml} from "./lib/baseHtml";
 import {config} from "dotenv";
 import * as path from "path";
 import {MIME_TYPES} from "./MIME_TYPES.ts";
+import * as fs from "node:fs";
+import { writeFile } from "node:fs/promises";
 
 config();
 
@@ -17,6 +19,14 @@ const getMimeType = (filepath: string): string => {
     const extension = getFileExtension(filepath);
     return MIME_TYPES[extension] || "text/plain";
 };
+
+const hitsTxtPath = "/hits.txt";
+const hitsFilePath = path.join(process.cwd(), hitsTxtPath);
+if (!fs.existsSync(hitsFilePath)) {
+    fs.writeFileSync(hitsFilePath, "0");
+}
+
+let hits = parseInt(fs.readFileSync(hitsFilePath, "utf-8"));
 
 // Bun server handler
 const server = serve({
@@ -42,6 +52,7 @@ const server = serve({
         // Handle dynamic routes (fallback to baseHtml render)
         try {
             const html = await baseHtml(req);
+            addHit().then(() => console.log(`Hits: ${hits}`));
             return new Response(html, { headers: { "Content-Type": "text/html" } });
         } catch (error) {
             console.error("Error rendering HTML:", error);
@@ -49,5 +60,11 @@ const server = serve({
         }
     },
 });
+
+async function addHit() {
+    hits++;
+    // write asynchronously to file
+    await writeFile(hitsFilePath, hits.toString());
+}
 
 console.log(`Server is running on http://localhost:${server.port}`);
