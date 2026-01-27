@@ -7,7 +7,7 @@ import { getHitsData, addHit, logUnknownRequest } from "./metrics";
 
 config();
 
-const ALLOWED_PATHS = ["/", "/favicon.ico", "/styles/style.css", "/main.js", "/main.js.map"];
+const ALLOWED_PATHS = ["/", "/favicon.ico", "/styles/style.css", "/main.js", "/main.js.map", "/requests-report"];
 
 console.log(process.cwd());
 
@@ -15,6 +15,17 @@ const outDir = path.join(process.cwd(), "out");
 const uiDir = path.join(process.cwd(), "src/ui");
 
 const ipRequestCount: Record<string, number> = {};
+
+const handleUnknownPath = async (req: Request, ip: string) => {
+    await logUnknownRequest(req, ip);
+    await new Promise((resolve) => {
+        setTimeout(resolve, 1000 + (Math.random() * 10000));
+    });
+    return new Response("Nice try. But no.", {
+        status: 200,
+        headers: { "logged-your-mom": "true" }
+    });
+};
 
 const getMimeType = (filepath: string): string => {
     const getFileExtension = (path: string): string =>
@@ -29,13 +40,30 @@ const server = serve({
     async fetch(req) {
         const url = new URL(req.url);
         const pathname = url.pathname;
+
+        const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "unknown";
+
+        if (pathname === "/requests-report") {
+            const code = url.searchParams.get("code");
+            if (code && code === process.env.CODE) {
+                const logFilePath = "requests.csv";
+                if (await Bun.file(logFilePath).exists()) {
+                    return new Response(Bun.file(logFilePath), {
+                        headers: { "Content-Type": "text/csv" }
+                    });
+                } else {
+                    return new Response("No requests logged yet.", { status: 404 });
+                }
+            } else {
+                return handleUnknownPath(req, ip);
+            }
+        }
+
         const isHit = !req.url.includes("favicon") && !pathname.includes(".") && req.method === "GET";
 
         if (req.method === "OPTIONS") {
             return new Response(null, { status: 204 });
         }
-
-        const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "unknown";
 
         // Handle static files from "out" and "src/ui" directories
         const staticFiles = [outDir, uiDir];
@@ -55,14 +83,7 @@ const server = serve({
 
         // Unknown path detection
         if (!staticFileFound && !ALLOWED_PATHS.includes(pathname)) {
-            await logUnknownRequest(req, ip);
-            await new Promise((resolve) => {
-                setTimeout(resolve, 1000 + (Math.random() * 10000));
-            });
-            return new Response("Nice try. But no.", {
-                status: 200,
-                headers: { "logged-your-mom": "true" }
-            });
+            return handleUnknownPath(req, ip);
         }
 
         if (!isHit && !req.url.includes("img") && !ALLOWED_PATHS.includes(pathname)) {
