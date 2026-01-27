@@ -16,6 +16,7 @@ const outDir = path.join(process.cwd(), "out");
 const uiDir = path.join(process.cwd(), "src/ui");
 
 const ipRequestCount: Record<string, number> = {};
+const excludedIps = process.env.EXCLUDED_IPS?.split(",").map(ip => ip.trim()) || [];
 
 const handleUnknownPath = async (req: Request, ip: string) => {
     await logUnknownRequest(req, ip);
@@ -86,7 +87,7 @@ const server = serve({
             return handleUnknownPath(req, ip);
         }
 
-        if (!isHit && !req.url.includes("img") && !ALLOWED_PATHS.includes(pathname)) {
+        if (!isHit && !req.url.includes("img") && !ALLOWED_PATHS.includes(pathname) && !excludedIps.includes(ip)) {
             console.log(`->\t[${req.method}] ${req.url}\t${ip}`);
         }
 
