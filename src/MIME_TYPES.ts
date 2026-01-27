@@ -10,4 +10,5 @@ export const MIME_TYPES: { [extension: string]: string } = {
     ico: "image/x-icon",
     vcf: "text/vcard",
     vcard: "text/vcard",
+    txt: "text/plain",
 };

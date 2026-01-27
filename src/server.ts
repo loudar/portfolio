@@ -8,7 +8,7 @@ import * as fs from "node:fs";
 
 config();
 
-const ALLOWED_PATHS = ["/", "/favicon.ico", "/styles/style.css", "/main.js", "/main.js.map", "/requests-report"];
+const ALLOWED_PATHS = ["/", "/favicon.ico", "/robots.txt", "/styles/style.css", "/main.js", "/main.js.map", "/requests-report"];
 
 console.log(process.cwd());
 
