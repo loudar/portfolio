@@ -45,13 +45,55 @@ export async function logUnknownRequest(req: Request, ip: string) {
     const method = req.method;
     const userAgent = req.headers.get("user-agent") || "unknown";
 
-    const baseLine = `"${timestamp}","${ip}","${path}","${method}","${userAgent}"`;
-    const logEntry = `${baseLine}\n`;
     const logFilePath = "requests.csv";
-
-    console.warn(`Unknown path request: ${baseLine}`);
-    if (!fs.existsSync(logFilePath)) {
-        await writeFile(logFilePath, "timestamp,ip,path,method,user_agent\n");
+    const header = "timestamp,ip,path,method,user_agent,count\n";
+    
+    let entries: string[][] = [];
+    if (fs.existsSync(logFilePath)) {
+        const content = fs.readFileSync(logFilePath, "utf-8");
+        entries = content.split("\n")
+            .filter(line => line.trim() !== "")
+            .slice(1) // skip header
+            .map(line => {
+                // Simple CSV parser for quoted values
+                const parts = [];
+                let current = "";
+                let inQuotes = false;
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"') inQuotes = !inQuotes;
+                    else if (char === ',' && !inQuotes) {
+                        parts.push(current);
+                        current = "";
+                    } else {
+                        current += char;
+                    }
+                }
+                parts.push(current);
+                return parts;
+            });
     }
-    await appendFile(logFilePath, logEntry);
+
+    let found = false;
+    for (const entry of entries) {
+        // entry: [timestamp, ip, path, method, user_agent, count]
+        if (entry[1] === ip && entry[2] === path && entry[3] === method && entry[4] === userAgent) {
+            const currentCount = parseInt(entry[5] || "1");
+            entry[5] = (currentCount + 1).toString();
+            entry[0] = timestamp;
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        entries.push([timestamp, ip, path, method, userAgent, "1"]);
+    }
+
+    const newContent = header + entries.map(entry => 
+        entry.map(field => `"${field}"`).join(",")
+    ).join("\n") + "\n";
+
+    await writeFile(logFilePath, newContent);
+    console.warn(`Unknown path request logged: "${timestamp}","${ip}","${path}","${method}","${userAgent}"`);
 }
