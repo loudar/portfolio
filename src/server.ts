@@ -21,7 +21,10 @@ const knownBotUserAgents = [
     "node",
     "Bridgy Fed",
     "trendictionbot",
-    "Twitterbot/1.0"
+    "Twitterbot/1.0",
+    "Mastodon",
+    "Akkoma",
+    "Misskey"
 ];
 const botRegexes = [/\W?Bot\W?/gmi];
 
