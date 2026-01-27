@@ -3,7 +3,9 @@ import { writeFile, appendFile } from "node:fs/promises";
 import * as path from "path";
 
 const isDev = !fs.existsSync("/portfolio");
-const hitsTxtPath = isDev ? path.join(process.cwd(), "hits.txt") : "/portfolio/hits.txt";
+const baseDir = isDev ? process.cwd() : "/portfolio";
+const hitsTxtPath = path.join(baseDir, "hits.txt");
+export const requestsCsvPath = path.join(baseDir, "requests.csv");
 
 if (!fs.existsSync(hitsTxtPath)) {
     fs.writeFileSync(hitsTxtPath, "");
@@ -45,12 +47,11 @@ export async function logUnknownRequest(req: Request, ip: string) {
     const method = req.method;
     const userAgent = req.headers.get("user-agent") || "unknown";
 
-    const logFilePath = "requests.csv";
     const header = "timestamp,ip,path,method,user_agent,count\n";
     
     let entries: string[][] = [];
-    if (fs.existsSync(logFilePath)) {
-        const content = fs.readFileSync(logFilePath, "utf-8");
+    if (fs.existsSync(requestsCsvPath)) {
+        const content = fs.readFileSync(requestsCsvPath, "utf-8");
         entries = content.split("\n")
             .filter(line => line.trim() !== "")
             .slice(1) // skip header
@@ -94,6 +95,6 @@ export async function logUnknownRequest(req: Request, ip: string) {
         entry.map(field => `"${field}"`).join(",")
     ).join("\n") + "\n";
 
-    await writeFile(logFilePath, newContent);
+    await writeFile(requestsCsvPath, newContent);
     console.warn(`Unknown path request logged: "${timestamp}","${ip}","${path}","${method}","${userAgent}"`);
 }

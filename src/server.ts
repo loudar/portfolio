@@ -3,7 +3,8 @@ import {baseHtml} from "./lib/baseHtml";
 import {config} from "dotenv";
 import * as path from "path";
 import {MIME_TYPES} from "./MIME_TYPES.ts";
-import { getHitsData, addHit, logUnknownRequest } from "./metrics";
+import {getHitsData, addHit, logUnknownRequest, requestsCsvPath} from "./metrics";
+import * as fs from "node:fs";
 
 config();
 
@@ -46,9 +47,8 @@ const server = serve({
         if (pathname === "/requests-report") {
             const code = url.searchParams.get("code");
             if (code && code === process.env.CODE) {
-                const logFilePath = "requests.csv";
-                if (await Bun.file(logFilePath).exists()) {
-                    return new Response(Bun.file(logFilePath), {
+                if (fs.existsSync(requestsCsvPath)) {
+                    return new Response(fs.readFileSync(requestsCsvPath, "utf-8"), {
                         headers: { "Content-Type": "text/csv" }
                     });
                 } else {
