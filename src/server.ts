@@ -59,6 +59,9 @@ const server = serve({
         // Unknown path detection
         if (!staticFileFound && !ALLOWED_PATHS.includes(pathname)) {
             await logUnknownRequest(req, ip);
+            await new Promise((resolve) => {
+                setTimeout(resolve, 1000 + (Math.random() * 10000));
+            });
         }
 
         // Handle dynamic routes (fallback to baseHtml render)
