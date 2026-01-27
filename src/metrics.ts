@@ -40,12 +40,11 @@ export async function addHit() {
     saveHitsData(data);
 }
 
-export async function logUnknownRequest(req: Request, ip: string) {
+export async function logUnknownRequest(req: Request, ip: string, userAgent: string) {
     const url = new URL(req.url);
     const timestamp = new Date().toISOString();
     const path = url.pathname;
     const method = req.method;
-    const userAgent = req.headers.get("user-agent") || "unknown";
 
     const header = "timestamp,ip,path,method,user_agent,count\n";
     

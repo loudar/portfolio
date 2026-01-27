@@ -18,8 +18,8 @@ const uiDir = path.join(process.cwd(), "src/ui");
 const ipRequestCount: Record<string, number> = {};
 const excludedIps = process.env.EXCLUDED_IPS?.split(",").map(ip => ip.trim()) || [];
 
-const handleUnknownPath = async (req: Request, ip: string) => {
-    await logUnknownRequest(req, ip);
+const handleUnknownPath = async (req: Request, ip: string, userAgent: string) => {
+    await logUnknownRequest(req, ip, userAgent);
     await new Promise((resolve) => {
         setTimeout(resolve, 1000 + (Math.random() * 10000));
     });
@@ -44,6 +44,7 @@ const server = serve({
         const pathname = url.pathname;
 
         const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "unknown";
+        const userAgent = req.headers.get("user-agent") || "unknown";
 
         if (pathname === "/requests-report") {
             const code = url.searchParams.get("code");
@@ -56,7 +57,7 @@ const server = serve({
                     return new Response("No requests logged yet.", { status: 404 });
                 }
             } else {
-                return handleUnknownPath(req, ip);
+                return handleUnknownPath(req, ip, userAgent);
             }
         }
 
@@ -84,11 +85,11 @@ const server = serve({
 
         // Unknown path detection
         if (!staticFileFound && !ALLOWED_PATHS.includes(pathname)) {
-            return handleUnknownPath(req, ip);
+            return handleUnknownPath(req, ip, userAgent);
         }
 
         if (!isHit && !req.url.includes("img") && !ALLOWED_PATHS.includes(pathname) && !excludedIps.includes(ip)) {
-            console.log(`->\t[${req.method}] ${req.url}\t${ip}`);
+            console.log(`->\t[${req.method}] ${req.url}\t${ip}\t${userAgent}`);
         }
 
         // Handle dynamic routes (fallback to baseHtml render)
@@ -98,9 +99,9 @@ const server = serve({
             if (isHit && !excludedIps.includes(ip)) {
                 const count = (ipRequestCount[ip] || 0) + 1;
                 if (count <= 10) {
-                    addHit().then(() => console.log(`+HIT\t[${req.method}] ${req.url}\t${ip} (Hits: ${count})`));
+                    addHit().then(() => console.log(`+HIT\t[${req.method}] ${req.url}\t${ip}\t${userAgent}\t(Hits: ${count})`));
                 } else {
-                    console.log(`NOHIT (limit reached)\t[${req.method}] ${req.url}\t${ip}`);
+                    console.log(`NOHIT (limit reached)\t[${req.method}] ${req.url}\t${ip}\t${userAgent}`);
                 }
                 ipRequestCount[ip] = count;
             }
