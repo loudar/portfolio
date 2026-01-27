@@ -36,9 +36,6 @@ const server = serve({
         }
 
         const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "unknown";
-        if (!isHit && !req.url.includes("img") && !ALLOWED_PATHS.includes(pathname)) {
-            console.log(`->\t[${req.method}] ${req.url}\t${ip}`);
-        }
 
         // Handle static files from "out" and "src/ui" directories
         const staticFiles = [outDir, uiDir];
@@ -62,6 +59,14 @@ const server = serve({
             await new Promise((resolve) => {
                 setTimeout(resolve, 1000 + (Math.random() * 10000));
             });
+            return new Response("Nice try. But no.", {
+                status: 200,
+                headers: { "logged-your-mom": "true" }
+            });
+        }
+
+        if (!isHit && !req.url.includes("img") && !ALLOWED_PATHS.includes(pathname)) {
+            console.log(`->\t[${req.method}] ${req.url}\t${ip}`);
         }
 
         // Handle dynamic routes (fallback to baseHtml render)
