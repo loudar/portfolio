@@ -95,7 +95,7 @@ const server = serve({
         try {
             const hitsData = getHitsData();
             const html = await baseHtml(req, hitsData);
-            if (isHit) {
+            if (isHit && !excludedIps.includes(ip)) {
                 const count = (ipRequestCount[ip] || 0) + 1;
                 if (count <= 10) {
                     addHit().then(() => console.log(`+HIT\t[${req.method}] ${req.url}\t${ip} (Hits: ${count})`));
