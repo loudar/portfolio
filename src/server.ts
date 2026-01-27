@@ -21,6 +21,7 @@ const knownBotUserAgents = [
     "node",
     "Bridgy Fed",
     "trendictionbot",
+    "Twitterbot/1.0"
 ];
 const botRegexes = [/\W?Bot\W?/gmi];
 
@@ -50,7 +51,7 @@ const server = serve({
         const pathname = url.pathname;
 
         const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "unknown";
-        const userAgent = req.headers.get("user-agent") || "unknown";
+        const userAgent = req.headers.get("user-agent")?.trim() || "unknown";
 
         if (pathname === "/requests-report") {
             const code = url.searchParams.get("code");
@@ -67,7 +68,7 @@ const server = serve({
             }
         }
 
-        const isBot = knownBotUserAgents.some(agent => userAgent.includes(agent)) || botRegexes.some(regex => regex.test(userAgent));
+        const isBot = knownBotUserAgents.some(agent => userAgent.includes(agent) || userAgent === agent) || botRegexes.some(regex => regex.test(userAgent));
         const isHit = !req.url.includes("favicon") && !pathname.includes(".") && req.method === "GET" && !isBot;
 
         if (req.method === "OPTIONS") {
