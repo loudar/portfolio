@@ -3,10 +3,11 @@ import {baseHtml} from "./lib/baseHtml";
 import {config} from "dotenv";
 import * as path from "path";
 import {MIME_TYPES} from "./MIME_TYPES.ts";
-import * as fs from "node:fs";
-import { writeFile } from "node:fs/promises";
+import { getHitsData, addHit, logUnknownRequest } from "./metrics";
 
 config();
+
+const ALLOWED_PATHS = ["/", "/favicon.ico", "/styles/style.css", "/main.js", "/main.js.map"];
 
 console.log(process.cwd());
 
@@ -22,35 +23,6 @@ const getMimeType = (filepath: string): string => {
     return MIME_TYPES[extension] || "text/plain";
 };
 
-const isDev = !fs.existsSync("/portfolio");
-
-const hitsTxtPath = isDev ? path.join(process.cwd(), "hits.txt") : "/portfolio/hits.txt";
-if (!fs.existsSync(hitsTxtPath)) {
-    fs.writeFileSync(hitsTxtPath, "");
-}
-
-function getHitsData(): Record<string, number> {
-    const content = fs.readFileSync(hitsTxtPath, "utf-8");
-    const lines = content.split("\n").filter(line => line.trim() !== "");
-    const data: Record<string, number> = {};
-    for (const line of lines) {
-        if (!line.includes(";")) continue;
-        const [date, count] = line.split(";");
-        const parsedCount = parseInt(count);
-        if (!isNaN(parsedCount)) {
-            data[date] = parsedCount;
-        }
-    }
-    return data;
-}
-
-function saveHitsData(data: Record<string, number>) {
-    const lines = Object.entries(data)
-        .sort(([a], [b]) => a.localeCompare(b))
-        .map(([date, count]) => `${date};${count}`);
-    fs.writeFileSync(hitsTxtPath, lines.join("\n"));
-}
-
 // Bun server handler
 const server = serve({
     port: parseInt(process.env.PORT || "3000"),
@@ -64,22 +36,29 @@ const server = serve({
         }
 
         const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "unknown";
-        if (!isHit && !req.url.includes("img")) {
+        if (!isHit && !req.url.includes("img") && !ALLOWED_PATHS.includes(pathname)) {
             console.log(`->\t[${req.method}] ${req.url}\t${ip}`);
         }
 
         // Handle static files from "out" and "src/ui" directories
         const staticFiles = [outDir, uiDir];
+        let staticFileFound = false;
         for (const dir of staticFiles) {
             const staticFilePath = path.join(dir, pathname.slice(1)); // Remove leading "/"
 
             if (await Bun.file(staticFilePath).exists()) {
+                staticFileFound = true;
                 const mimeType = getMimeType(staticFilePath);
 
                 return new Response(await file(staticFilePath).arrayBuffer(), {
                     headers: { "Content-Type": mimeType },
                 });
             }
+        }
+
+        // Unknown path detection
+        if (!staticFileFound && !ALLOWED_PATHS.includes(pathname)) {
+            await logUnknownRequest(req, ip);
         }
 
         // Handle dynamic routes (fallback to baseHtml render)
@@ -102,12 +81,5 @@ const server = serve({
         }
     },
 });
-
-async function addHit() {
-    const today = new Date().toISOString().split("T")[0];
-    const data = getHitsData();
-    data[today] = (data[today] || 0) + 1;
-    saveHitsData(data);
-}
 
 console.log(`Server is running on http://localhost:${server.port}`);
