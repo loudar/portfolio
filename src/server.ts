@@ -17,6 +17,12 @@ const uiDir = path.join(process.cwd(), "src/ui");
 
 const ipRequestCount: Record<string, number> = {};
 const excludedIps = process.env.EXCLUDED_IPS?.split(",").map(ip => ip.trim()) || [];
+const knownBotUserAgents = [
+    "node",
+    "Bridgy Fed",
+    "trendictionbot",
+];
+const botRegexes = [/\W?Bot\W?/gmi];
 
 const handleUnknownPath = async (req: Request, ip: string, userAgent: string) => {
     await logUnknownRequest(req, ip, userAgent);
@@ -61,7 +67,8 @@ const server = serve({
             }
         }
 
-        const isHit = !req.url.includes("favicon") && !pathname.includes(".") && req.method === "GET";
+        const isBot = knownBotUserAgents.some(agent => userAgent.includes(agent)) || botRegexes.some(regex => regex.test(userAgent));
+        const isHit = !req.url.includes("favicon") && !pathname.includes(".") && req.method === "GET" && !isBot;
 
         if (req.method === "OPTIONS") {
             return new Response(null, { status: 204 });
