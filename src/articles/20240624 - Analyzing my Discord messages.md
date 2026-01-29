@@ -1,5 +1,3 @@
-If you're interested in running this yourself, see the [related repository on GitHub](https://github.com/loudar/sentiment-analysis).
-
 # Analyzing my Discord messages
 
 I started using Discord in 2016. Although I've deleted a good amount of the messages I wrote since then, it's roughly 133000 of them and counting.
@@ -122,4 +120,6 @@ Expensive, if I would've paid anything. Yes, I blew through the budget of my sub
 
 ![Cost](/img/blog-images/discord-sentiment/cost.png "Cost of everything (289.85€)")
 
-Hope you enjoyed this small experiment! Feel free to check out the [repo](https://github.com/loudar/sentiment-analysis) and try it for yourself. Just keep the cost in mind :p 
+Hope you enjoyed this small experiment! Feel free to check out the [repo](https://github.com/loudar/sentiment-analysis) and try it for yourself. Just keep the cost in mind :p
+
+If you're interested in running this yourself, see the [related repository on GitHub](https://github.com/loudar/sentiment-analysis).

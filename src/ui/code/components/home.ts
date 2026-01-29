@@ -34,8 +34,8 @@ export class Home {
             ),
             Generics.heading(2, "Languages"),
             horizontal(
-                Generics.skill("German"),
-                Generics.skill("English"),
+                Generics.pill("German"),
+                Generics.pill("English"),
             ).classes("small-gap")
         ];
     }

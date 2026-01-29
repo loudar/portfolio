@@ -71,29 +71,30 @@ const server = serve({
                         const title = dateMatch[2];
                         const formattedDate = `${dateStr.substring(0, 4)}-${dateStr.substring(4, 6)}-${dateStr.substring(6, 8)}`;
                         return {
-                            id: f,
+                            id: dateStr,
                             name: title,
                             date: formattedDate
                         };
                     }
-                    return {
-                        id: f,
-                        name: name,
-                        date: ""
-                    };
-                });
+                    return null;
+                })
+                .filter(a => a !== null);
             return new Response(JSON.stringify(articles), {
                 headers: { "Content-Type": "application/json" }
             });
         }
 
         if (pathname.startsWith("/api/article/")) {
-            const id = path.basename(pathname);
-            if (id.endsWith(".draft.md")) {
-                return new Response("Unauthorized", { status: 403 });
+            const dateId = path.basename(pathname);
+            if (!/^\d{8}$/.test(dateId)) {
+                return new Response("Invalid ID format", { status: 400 });
             }
-            const filePath = path.join(articlesDir, id);
-            if (fs.existsSync(filePath) && path.dirname(filePath) === articlesDir) {
+
+            const files = fs.readdirSync(articlesDir);
+            const fileName = files.find(f => f.startsWith(dateId) && f.endsWith(".md") && !f.endsWith(".draft.md"));
+
+            if (fileName) {
+                const filePath = path.join(articlesDir, fileName);
                 return new Response(fs.readFileSync(filePath, "utf-8"), {
                     headers: { "Content-Type": "text/plain" }
                 });

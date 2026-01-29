@@ -235,12 +235,12 @@ export class Generics {
                 create("div")
                     .classes("flex", "small-gap")
                     .children(
-                        ...skills.map(Generics.skill)
+                        ...skills.map(Generics.pill)
                     ).build()
             ).build();
     }
 
-    static skill(text: string) {
+    static pill(text: string) {
         return create("span")
             .classes("skill")
             .text(text)
