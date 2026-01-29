@@ -63,10 +63,25 @@ const server = serve({
             const files = fs.readdirSync(articlesDir);
             const articles = files
                 .filter(f => f.endsWith(".md") && !f.endsWith(".draft.md"))
-                .map(f => ({
-                    id: f,
-                    name: f.replace(/\.md$/, "")
-                }));
+                .map(f => {
+                    const name = f.replace(/\.md$/, "");
+                    const dateMatch = name.match(/^(\d{8})\s*-\s*(.*)$/);
+                    if (dateMatch) {
+                        const dateStr = dateMatch[1];
+                        const title = dateMatch[2];
+                        const formattedDate = `${dateStr.substring(0, 4)}-${dateStr.substring(4, 6)}-${dateStr.substring(6, 8)}`;
+                        return {
+                            id: f,
+                            name: title,
+                            date: formattedDate
+                        };
+                    }
+                    return {
+                        id: f,
+                        name: name,
+                        date: ""
+                    };
+                });
             return new Response(JSON.stringify(articles), {
                 headers: { "Content-Type": "application/json" }
             });

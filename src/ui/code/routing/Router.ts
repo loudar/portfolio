@@ -42,10 +42,6 @@ export class Router {
         this.currentRoute.value = route;
         currentRoute.value = route;
         if (route) {
-            if (route !== currentRoute.value) {
-                history.pushState({}, "", window.location.origin + path);
-            }
-
             if (route.title) {
                 document.title = route.title;
             }
@@ -84,6 +80,7 @@ export class Router {
         if (!path.startsWith("/")) {
             path = "/" + path;
         }
+        history.pushState({}, "", window.location.origin + path);
         await this.handleRouteChange();
     }
 

@@ -4,7 +4,7 @@ import {navigate} from "../routing/Router.ts";
 
 export class ArticlesOverview {
     static async page() {
-        const articles$ = signal<{id: string, name: string}[]>([]);
+        const articles$ = signal<{id: string, name: string, date: string}[]>([]);
         
         fetch("/api/articles")
             .then(r => r.json())
@@ -18,7 +18,12 @@ export class ArticlesOverview {
                     .onclick(() => navigate(`/article/${article.id}`))
                     .children(
                         Generics.icon("description"),
-                        create("span").text(article.name).build()
+                        create("div")
+                            .classes("flex-v", "small-gap")
+                            .children(
+                                create("span").classes("article-title").text(article.name).build(),
+                                create("span").classes("article-date").text(article.date).build()
+                            ).build()
                     ).build();
             })
         );

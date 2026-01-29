@@ -393,6 +393,15 @@ table {
     background-color: var(--gray-1);
 }
 
+.article-title {
+    font-weight: bold;
+}
+
+.article-date {
+    font-size: 0.8em;
+    color: var(--gray-7);
+}
+
 .article-content img {
     max-width: 100%;
 }
