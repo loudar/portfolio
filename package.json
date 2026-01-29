@@ -9,7 +9,8 @@
     "start-prod": "bun ./src/server.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/showdown": "^2.0.6"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -17,6 +18,7 @@
   "dependencies": {
     "@targoninc/jess": "^0.0.4",
     "dotenv": "^16.4.7",
-    "highlight.js": "11.8.0"
+    "highlight.js": "11.8.0",
+    "showdown": "^2.1.0"
   }
 }

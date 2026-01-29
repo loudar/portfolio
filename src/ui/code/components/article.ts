@@ -1,10 +1,11 @@
 import hljs from "highlight.js";
 import {Generics} from "./generics.ts";
 import {compute, create, Signal} from "@targoninc/jess";
+import showdown from "showdown";
 
 export class Article {
     static markdownToHtml(markdown: Signal<string>) {
-        const converter = new window.showdown.Converter();
+        const converter = new showdown.Converter();
         const html = compute(md => converter.makeHtml(md).replaceAll(" href", ' target="_blank" href'), markdown);
 
         const content = create("div")

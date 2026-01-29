@@ -383,3 +383,16 @@ table {
         background-position-x: 100%;
     }
 }
+.article-item {
+    padding: var(--inline-padding);
+    transition: background-color var(--time);
+    border-radius: var(--radius);
+}
+
+.article-item:hover {
+    background-color: var(--gray-1);
+}
+
+.article-content img {
+    max-width: 100%;
+}

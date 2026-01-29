@@ -8,12 +8,13 @@ import * as fs from "node:fs";
 
 config();
 
-const ALLOWED_PATHS = ["/", "/favicon.ico", "/robots.txt", "/styles/style.css", "/main.js", "/main.js.map", "/requests-report"];
+const ALLOWED_PATHS = ["/", "/favicon.ico", "/robots.txt", "/styles/style.css", "/main.js", "/main.js.map", "/requests-report", "/articles", "/article"];
 
 console.log(process.cwd());
 
 const outDir = path.join(process.cwd(), "out");
 const uiDir = path.join(process.cwd(), "src/ui");
+const articlesDir = path.join(process.cwd(), "src/articles");
 
 const ipRequestCount: Record<string, number> = {};
 const excludedIps = process.env.EXCLUDED_IPS?.split(",").map(ip => ip.trim()) || [];
@@ -57,6 +58,34 @@ const server = serve({
 
         const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "unknown";
         const userAgent = req.headers.get("user-agent")?.trim() || "unknown";
+
+        if (pathname === "/api/articles") {
+            const files = fs.readdirSync(articlesDir);
+            const articles = files
+                .filter(f => f.endsWith(".md") && !f.endsWith(".draft.md"))
+                .map(f => ({
+                    id: f,
+                    name: f.replace(/\.md$/, "")
+                }));
+            return new Response(JSON.stringify(articles), {
+                headers: { "Content-Type": "application/json" }
+            });
+        }
+
+        if (pathname.startsWith("/api/article/")) {
+            const id = path.basename(pathname);
+            if (id.endsWith(".draft.md")) {
+                return new Response("Unauthorized", { status: 403 });
+            }
+            const filePath = path.join(articlesDir, id);
+            if (fs.existsSync(filePath) && path.dirname(filePath) === articlesDir) {
+                return new Response(fs.readFileSync(filePath, "utf-8"), {
+                    headers: { "Content-Type": "text/plain" }
+                });
+            } else {
+                return new Response("Not Found", { status: 404 });
+            }
+        }
 
         if (pathname === "/requests-report") {
             const code = url.searchParams.get("code");
