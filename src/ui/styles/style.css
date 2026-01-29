@@ -385,7 +385,7 @@ table {
 }
 
 .article-item {
-    padding: var(--inline-padding);
+    padding: 10px;
     transition: background-color var(--time);
     border-radius: var(--radius);
     cursor: pointer;
@@ -393,6 +393,7 @@ table {
 
 .article-item:hover {
     background-color: var(--gray-2);
+    border-right: 1.2em inset var(--orange);
 }
 
 .article-title {
@@ -414,4 +415,44 @@ p {
 
 code {
     color: var(--cyan);
+}
+
+@property --spin {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.loading {
+    height: 10px;
+    width: 100px;
+    margin: auto;
+
+    border-radius: 999px;
+
+    /* rotate the *background*, not the element */
+    background: conic-gradient(
+            from var(--spin),
+            #ff0000,
+            #ff7a00,
+            #ffe600,
+            #00c853,
+            #00b0ff,
+            #2962ff,
+            #aa00ff,
+            #ff00aa,
+            #ff0000
+    );
+
+    animation: loading-rainbow-spin 1.2s linear infinite;
+}
+
+@keyframes loading-rainbow-spin {
+    to {
+        --spin: 360deg;
+    }
+}
+
+.article-content {
+    padding-bottom: 30dvh;
 }

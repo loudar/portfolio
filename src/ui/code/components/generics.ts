@@ -62,7 +62,7 @@ export class Generics {
             return create("div")
                 .classes("container", "layer-2")
                 .children(
-                    signalMap(entries, create("div").classes("flex-v"), template)
+                    signalMap(entries, vertical(), template)
                 ).build();
         }
 
