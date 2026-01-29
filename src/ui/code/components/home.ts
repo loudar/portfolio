@@ -18,6 +18,7 @@ export class Home {
                     ...Home.employment(),
                     Home.webbuttons(),
                     Home.hits(),
+                    Generics.loading(),
                 ).build(),
         );
     }
