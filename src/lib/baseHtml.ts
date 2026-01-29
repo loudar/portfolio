@@ -14,6 +14,7 @@ export async function baseHtml(req: Request, hitsData: Record<string, number>) {
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
     <!-- Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -23,6 +24,7 @@ export async function baseHtml(req: Request, hitsData: Record<string, number>) {
     
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/styles/style.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/an-old-hope.min.css" rel="stylesheet">
 
     <!-- OG Tags -->
     <meta property="og:type" content="website"/>

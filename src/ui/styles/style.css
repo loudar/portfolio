@@ -249,7 +249,7 @@ table {
     flex-grow: 1;
 }
 
-.link-container {
+.link-container, button {
     padding: 2px 10px;
     background: var(--gray-1);
     border: 1px solid var(--gray-3);
@@ -260,7 +260,7 @@ table {
     --distance: 2px;
 }
 
-.link-container:hover {
+.link-container:hover, button:hover {
     filter: invert(1);
     transform: translateX(var(--distance)) translateY(calc(-1 * var(--distance)));
     box-shadow: calc(-1 * var(--distance)) var(--distance) 5px 0 var(--gray-5);

@@ -192,6 +192,18 @@ export class Generics {
             ).build();
     }
 
+    static button(icon: StringOrSignal, text: StringOrSignal, onclick: () => void) {
+        return create("button")
+            .classes("flex")
+            .onclick(onclick)
+            .children(
+                Generics.icon(icon),
+                create("span")
+                    .text(text)
+                    .build(),
+            ).build();
+    }
+
     static text(text: string) {
         return create("span")
             .text(text)
