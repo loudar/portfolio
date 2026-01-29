@@ -478,7 +478,7 @@ table {
     max-width: 100%;
 }
 
-p, h3 {
+p, .article-content h3 {
     margin-top: 1em;
 }
 
