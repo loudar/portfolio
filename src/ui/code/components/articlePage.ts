@@ -1,5 +1,5 @@
 import {signal} from "@targoninc/jess";
-import {Generics} from "./generics.ts";
+import {Generics, horizontal} from "./generics.ts";
 import {Article} from "./article.ts";
 
 export class ArticlePage {
@@ -16,6 +16,10 @@ export class ArticlePage {
             .catch(err => markdown$.value = "# Error\n" + err.message);
 
         return Generics.pageFrame(
+            horizontal(
+                Generics.link("/", "Home", "home"),
+                Generics.link("/articles", "Articles", "article"),
+            ).classes("small-gap").build(),
             Article.markdownToHtml(markdown$)
         );
     }

@@ -11,7 +11,8 @@ export class ArticlesOverview {
             .then(data => articles$.value = data);
 
         return Generics.pageFrame(
-            Generics.heading(1, "Articles", "article"),
+            Generics.link("/", "Home", "home"),
+            Generics.heading(1, "Articles"),
             Generics.list(articles$, (article) => {
                 return create("div")
                     .classes("flex", "align-children", "pointer", "article-item")

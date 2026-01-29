@@ -383,14 +383,16 @@ table {
         background-position-x: 100%;
     }
 }
+
 .article-item {
     padding: var(--inline-padding);
     transition: background-color var(--time);
     border-radius: var(--radius);
+    cursor: pointer;
 }
 
 .article-item:hover {
-    background-color: var(--gray-1);
+    background-color: var(--gray-2);
 }
 
 .article-title {
@@ -408,4 +410,8 @@ table {
 
 p {
     margin-top: 1em;
+}
+
+code {
+    color: var(--cyan);
 }
