@@ -12,9 +12,6 @@ export class ArticlePage {
             .then(async r => {
                 if (!r.ok) throw new Error("Article not found");
 
-                await new Promise(resolve => {
-                    setTimeout(resolve, 5000);
-                });
                 return r.text();
             })
             .then(text => markdown$.value = text)
