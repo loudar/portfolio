@@ -192,16 +192,27 @@ export class Generics {
             ).build();
     }
 
-    static button(icon: StringOrSignal, text: StringOrSignal, onclick: () => void, classes: StringOrSignal[] = []) {
+    static button(icon: StringOrSignal, text: StringOrSignal | null, onclick: () => void, classes: StringOrSignal[] = []) {
         return create("button")
             .classes("flex", ...classes)
             .onclick(onclick)
             .children(
                 Generics.icon(icon),
-                create("span")
+                text ? create("span")
                     .text(text)
-                    .build(),
+                    .build() : nullElement(),
             ).build();
+    }
+
+    static upDownButtons() {
+        return horizontal(
+            Generics.button("arrow_upward", null, () => {
+                window.scrollTo({top: 0, behavior: "smooth"});
+            }, ["borderless"]),
+            Generics.button("arrow_downward", null, () => {
+                window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});
+            }, ["borderless"]),
+        );
     }
 
     static text(text: string) {

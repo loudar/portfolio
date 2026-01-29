@@ -79,7 +79,7 @@ You can have fans in dozens of different places, and it's basically impossible t
 
 SoundCloud, YouTube and Bandcamp all have an advantage over the others here because you're able to directly interact with the artist.
 Buying music on bandcamp is so much more likely to be seen by the artist and responded to than buying it on iTunes, for example (let alone just streaming it).
-SoundCloud and YouTube let you comment on the music, which deepens the possible relationship artists and fans can build over time. 
+SoundCloud and YouTube let you comment on the music, which deepens the possible relationship artists and fans can build over time.
 
 ## Required Features
 
@@ -94,6 +94,8 @@ And even though there are [efforts](https://www.bbc.com/news/articles/cr4wyy3xq5
 Art is not seen with the same respect in our society that other jobs are.
 Of course, it's different from being a doctor saving lives. 
 However, if we don't have art to bring us together through shared cultural experiences and ways of building community, we will just die alone and hating everyone that doesn't share every single opinion we have.
+
+
 
 ## Accepting from distributors
 

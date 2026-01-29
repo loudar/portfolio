@@ -16,6 +16,7 @@ export class ArticlesOverview {
             horizontal(
                 horizontal(
                     Generics.link("/", "Home", "home"),
+                    Generics.upDownButtons()
                 ).classes("sticky")
             ).classes("top-links").build(),
             Generics.heading(1, "Articles"),

@@ -19,6 +19,9 @@ export class Home {
                     Home.webbuttons(),
                     Home.hits(),
                     Generics.loading(),
+                    horizontal(
+                        Generics.upDownButtons()
+                    ).classes("sticky", "over-600"),
                 ).build(),
         );
     }

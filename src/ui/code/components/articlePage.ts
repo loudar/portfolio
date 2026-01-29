@@ -23,9 +23,7 @@ export class ArticlePage {
                 horizontal(
                     Generics.link("/", "Home", "home"),
                     Generics.link("/articles", "Articles", "article"),
-                    Generics.button("arrow_upward", "To top", () => {
-                        window.scrollTo({top: 0, behavior: "smooth"});
-                    }, ["borderless"]),
+                    Generics.upDownButtons()
                 ).classes("sticky"),
             ).classes("small-gap", "top-links").build(),
             when(loading, Generics.loading()),

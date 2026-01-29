@@ -54,6 +54,9 @@ export class Router {
             this.onNoRouteFound && await this.onNoRouteFound();
             this.currentParams.value = {};
         }
+
+        // Stupid bullshit
+        setTimeout(() => window.scrollTo(0, 0), 10);
     }
 
     getParams(fullPath: string, route: Route) {

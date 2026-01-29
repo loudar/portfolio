@@ -276,26 +276,26 @@ table {
 
 .link-container, button {
     padding: 2px 10px;
-    background-color: transparent;
+    background: linear-gradient(45deg, var(--gray-1), var(--gray-2));
     border: 1px solid var(--gray-3);
     border-radius: var(--radius);
     max-width: max-content;
     cursor: pointer;
-    transition: background-color transform calc(var(--time) * 5) ease;
+    transition: background transform calc(var(--time) * 5) ease;
     color: var(--black);
     --distance: 2px;
     font-size: 1.2rem;
 }
 
-.link-container:hover, button:hover {
-    filter: invert(1);
-    background-color: var(--white);
-    box-shadow: none;
-    border: 1px inset var(--gray-3);
+button.borderless {
+    background: linear-gradient(45deg, var(--gray-2), transparent);
 }
 
-button.borderless {
-    border-width: 0;
+.link-container:hover, button:hover {
+    filter: invert(1);
+    background: var(--white);
+    box-shadow: none;
+    border: 1px inset var(--gray-3);
 }
 
 .relative {
@@ -537,11 +537,18 @@ code {
     position: fixed;
     padding: 10px;
     border-radius: calc(var(--radius) * 2);
-    border: 1px solid color-mix(in oklab, var(--black), transparent 90%);
+    border: 1px solid color-mix(in oklab, var(--black), transparent 50%);
     backdrop-filter: blur(10px);
     margin-left: -10px;
+    background: linear-gradient(-45deg, color-mix(in oklab, var(--blue), transparent 95%), color-mix(in oklab, var(--cyan), transparent 95%));
 }
 
 .top-links {
-    margin-bottom: 56px;
+    margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+    .over-600 {
+        display: none;
+    }
 }
