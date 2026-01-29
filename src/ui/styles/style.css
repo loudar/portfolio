@@ -405,3 +405,7 @@ table {
 .article-content img {
     max-width: 100%;
 }
+
+p {
+    margin-top: 1em;
+}

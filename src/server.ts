@@ -142,11 +142,12 @@ const server = serve({
         }
 
         // Unknown path detection
-        if (!staticFileFound && !ALLOWED_PATHS.includes(pathname)) {
+        const isDynamicArticlePath = pathname.startsWith("/article/");
+        if (!staticFileFound && !ALLOWED_PATHS.includes(pathname) && !isDynamicArticlePath) {
             return handleUnknownPath(req, ip, userAgent);
         }
 
-        if (!isHit && !req.url.includes("img") && !ALLOWED_PATHS.includes(pathname) && !excludedIps.includes(ip)) {
+        if (!isHit && !req.url.includes("img") && !ALLOWED_PATHS.includes(pathname) && !isDynamicArticlePath && !excludedIps.includes(ip)) {
             console.log(`->\t[${req.method}] ${req.url}\t${ip}\t${userAgent}`);
         }
 
