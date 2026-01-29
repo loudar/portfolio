@@ -468,7 +468,7 @@ table {
     max-width: 100%;
 }
 
-p {
+p, h3 {
     margin-top: 1em;
 }
 
