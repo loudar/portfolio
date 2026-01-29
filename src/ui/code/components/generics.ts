@@ -162,7 +162,7 @@ export class Generics {
             .build();
     }
 
-    static link(url: StringOrSignal, title: StringOrSignal, icon?: StringOrSignal, classes: StringOrSignal[] = []) {
+    static link(url: StringOrSignal, title: StringOrSignal, icon?: StringOrSignal, iconPosition: "right" | "left" = "right") {
         let isRemote = false;
         if (typeof url === "string") {
             isRemote = url.includes(":");
@@ -171,7 +171,7 @@ export class Generics {
         }
 
         return create("a")
-            .classes("link-container", "flex", "align-children", "small-gap", ...classes)
+            .classes("link-container", "flex", "align-children", "small-gap")
             .href(url)
             .target(isRemote ? "_blank" : "_self")
             .onclick(e => {
@@ -185,10 +185,11 @@ export class Generics {
                 }
             })
             .children(
+                iconPosition === "left" ? when(icon, Generics.icon(icon ?? "")) : nullElement(),
                 create("span")
                     .text(title)
                     .build(),
-                when(icon, Generics.icon(icon ?? ""))
+                iconPosition === "right" ? when(icon, Generics.icon(icon ?? "")) : nullElement()
             ).build();
     }
 
@@ -289,11 +290,11 @@ export class Generics {
             .build();
     }
 
-    static project(link: string, description: string, name: string, overrideIcon?: StringOrSignal) {
+    static project(link: string, description: string, name: string, overrideIcon?: StringOrSignal, iconPosition: "right" | "left" = "right") {
         return create("div")
             .classes("flex", "break-small", "space-between")
             .children(
-                Generics.link(link, name, overrideIcon ?? "arrow_outward"),
+                Generics.link(link, name, overrideIcon ?? "arrow_outward", iconPosition),
                 create("div")
                     .classes("line", "flex-grow")
                     .build(),

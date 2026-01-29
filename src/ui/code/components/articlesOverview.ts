@@ -15,7 +15,7 @@ export class ArticlesOverview {
         return Generics.pageFrame(
             horizontal(
                 horizontal(
-                    Generics.link("/", "Home", "home"),
+                    Generics.link("/", "Home", "west", "left"),
                     Generics.upDownButtons()
                 ).classes("sticky")
             ).classes("top-links").build(),
@@ -26,7 +26,7 @@ export class ArticlesOverview {
                     .classes("flex", "align-children", "pointer", "article-item")
                     .onclick(() => navigate(`/article/${article.id}`))
                     .children(
-                        Generics.icon("description"),
+                        Generics.icon("auto_stories"),
                         horizontal(
                             Generics.pill(article.date),
                             create("span").classes("article-title").text(article.name).build(),

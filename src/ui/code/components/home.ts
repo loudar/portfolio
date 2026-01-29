@@ -123,11 +123,11 @@ export class Home {
     static certificates() {
         return [
             Generics.heading(2, "Certificates"),
-            Generics.project("https://certificates.dev/angular/certificates/a0722815-356e-4f13-9d1d-94c8a1d2e4b6", "Certificates.dev", "Junior Angular Developer", "license"),
-            Generics.project("https://learn.microsoft.com/api/credentials/share/en-us/AlexanderFritsch-9309/88DF17DA6E811F4F?sharingId=E6C821E6251813B9", "Microsoft Certified", "Azure AI Engineer Associate", "license"),
-            Generics.project("https://learn.microsoft.com/api/credentials/share/en-us/AlexanderFritsch-9309/2784ABC91F604BDA?sharingId=E6C821E6251813B9", "Microsoft Certified", "Azure Developer Associate", "license"),
-            Generics.project("https://learn.microsoft.com/api/credentials/share/de-de/AlexanderFritsch-9309/A8CC6ACA3540BC60?sharingId=E6C821E6251813B9", "Microsoft Certified", "DevOps Engineer Expert", "license"),
-            Generics.project("https://www.credly.com/badges/0c6093a6-2be7-4b13-a5a0-5908438811a1", "Google", "UX Design", "license"),
+            Generics.project("https://certificates.dev/angular/certificates/a0722815-356e-4f13-9d1d-94c8a1d2e4b6", "Certificates.dev", "Junior Angular Developer", "license", "left"),
+            Generics.project("https://learn.microsoft.com/api/credentials/share/en-us/AlexanderFritsch-9309/88DF17DA6E811F4F?sharingId=E6C821E6251813B9", "Microsoft Certified", "Azure AI Engineer Associate", "license", "left"),
+            Generics.project("https://learn.microsoft.com/api/credentials/share/en-us/AlexanderFritsch-9309/2784ABC91F604BDA?sharingId=E6C821E6251813B9", "Microsoft Certified", "Azure Developer Associate", "license", "left"),
+            Generics.project("https://learn.microsoft.com/api/credentials/share/de-de/AlexanderFritsch-9309/A8CC6ACA3540BC60?sharingId=E6C821E6251813B9", "Microsoft Certified", "DevOps Engineer Expert", "license", "left"),
+            Generics.project("https://www.credly.com/badges/0c6093a6-2be7-4b13-a5a0-5908438811a1", "Google", "UX Design", "license", "left"),
         ]
     }
 

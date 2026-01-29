@@ -21,8 +21,8 @@ export class ArticlePage {
         return Generics.pageFrame(
             horizontal(
                 horizontal(
-                    Generics.link("/", "Home", "home"),
-                    Generics.link("/articles", "Articles", "article"),
+                    Generics.link("/", "Home", "west", "left"),
+                    Generics.link("/articles", "Articles", "keyboard_arrow_left",  "left"),
                     Generics.upDownButtons()
                 ).classes("sticky"),
             ).classes("small-gap", "top-links").build(),
