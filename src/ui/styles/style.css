@@ -99,6 +99,16 @@ li {
     font-size: .9em;
 }
 
+li + li {
+    margin-top: .5em;
+}
+
+u {
+    text-decoration: underline dotted;
+    color: var(--gray-5);
+    text-underline-position: under;
+}
+
 .article-content a {
     color: var(--cyan);
     text-decoration: underline;
