@@ -9,7 +9,7 @@ export class ArticlesOverview {
 
         fetch("/api/articles")
             .then(r => r.json())
-            .then(data => articles$.value = data)
+            .then(data => articles$.value = data.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()))
             .finally(() => loading.value = false);
 
         return Generics.pageFrame(

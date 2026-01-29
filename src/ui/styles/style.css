@@ -95,6 +95,10 @@ a {
     text-decoration: none;
 }
 
+li {
+    font-size: .9em;
+}
+
 .article-content a {
     color: var(--cyan);
     text-decoration: underline;
@@ -400,11 +404,55 @@ table {
     transition: background-color var(--time);
     border-radius: var(--radius);
     cursor: pointer;
+    border: 1px solid transparent;
 }
 
 .article-item:hover {
-    background-color: var(--gray-2);
+    background-color: var(--gray-1);
+    border: 1px solid var(--gray-3);
     border-right: 1.2em inset var(--orange);
+}
+
+.article-item:first-child {
+    position: relative;
+    z-index: 0;
+    border-radius: var(--radius);
+}
+
+.article-item:first-child::before {
+    content: "";
+    position: absolute;
+    inset: -2px;                 /* border thickness (outer) */
+    border-radius: inherit;
+    padding: 2px;                /* border thickness (ring width) */
+    z-index: -1;
+
+    background: conic-gradient(
+            from var(--spin),
+            #ff0000,
+            #ff7a00,
+            #ffe600,
+            #00c853,
+            #00b0ff,
+            #2962ff,
+            #aa00ff,
+            #ff00aa,
+            #ff0000
+    );
+
+    /* punch out the center so only the border remains */
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+
+    animation: article-item-border-spin 5s linear infinite;
+}
+
+@keyframes article-item-border-spin {
+    to {
+        --spin: 360deg;
+    }
 }
 
 .article-title {
