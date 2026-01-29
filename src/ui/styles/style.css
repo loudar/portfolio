@@ -95,6 +95,17 @@ a {
     text-decoration: none;
 }
 
+.article-content a {
+    color: var(--cyan);
+    text-decoration: underline;
+}
+
+.article-content a.citation {
+    font-size: .8em;
+    vertical-align: top;
+    text-decoration: none;
+}
+
 .flex, .flex-v {
     display: flex;
     gap: var(--layout-gap);
