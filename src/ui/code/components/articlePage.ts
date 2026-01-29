@@ -20,9 +20,14 @@ export class ArticlePage {
 
         return Generics.pageFrame(
             horizontal(
-                Generics.link("/", "Home", "home"),
-                Generics.link("/articles", "Articles", "article"),
-            ).classes("small-gap").build(),
+                horizontal(
+                    Generics.link("/", "Home", "home"),
+                    Generics.link("/articles", "Articles", "article"),
+                    Generics.button("arrow_upward", "To top", () => {
+                        window.scrollTo({top: 0, behavior: "smooth"});
+                    }, ["borderless"]),
+                ).classes("sticky"),
+            ).classes("small-gap", "top-links").build(),
             when(loading, Generics.loading()),
             Article.markdownToHtml(markdown$)
         );

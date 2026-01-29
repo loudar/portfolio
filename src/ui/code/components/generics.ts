@@ -162,7 +162,7 @@ export class Generics {
             .build();
     }
 
-    static link(url: StringOrSignal, title: StringOrSignal, icon?: StringOrSignal) {
+    static link(url: StringOrSignal, title: StringOrSignal, icon?: StringOrSignal, classes: StringOrSignal[] = []) {
         let isRemote = false;
         if (typeof url === "string") {
             isRemote = url.includes(":");
@@ -171,7 +171,7 @@ export class Generics {
         }
 
         return create("a")
-            .classes("link-container", "flex", "align-children", "small-gap")
+            .classes("link-container", "flex", "align-children", "small-gap", ...classes)
             .href(url)
             .target(isRemote ? "_blank" : "_self")
             .onclick(e => {
@@ -192,9 +192,9 @@ export class Generics {
             ).build();
     }
 
-    static button(icon: StringOrSignal, text: StringOrSignal, onclick: () => void) {
+    static button(icon: StringOrSignal, text: StringOrSignal, onclick: () => void, classes: StringOrSignal[] = []) {
         return create("button")
-            .classes("flex")
+            .classes("flex", ...classes)
             .onclick(onclick)
             .children(
                 Generics.icon(icon),
@@ -226,12 +226,10 @@ export class Generics {
             .classes("flex-v", "employment", "small-gap")
             .children(
                 Generics.dateSpan(start, end),
-                create("div")
-                    .classes("flex", "break-small")
-                    .children(
-                        Generics.heading(3, title + " @", icon),
-                        Generics.link(link, name, "arrow_outward"),
-                    ).build(),
+                horizontal(
+                    Generics.heading(3, title + " @", icon),
+                    Generics.link(link, name, "arrow_outward"),
+                ).classes("break-small").build(),
                 create("div")
                     .classes("flex", "small-gap")
                     .children(
@@ -323,6 +321,6 @@ export function vertical(...children: AnyNode[]) {
 
 export function horizontal(...children: AnyNode[]) {
     return create("div")
-        .classes("flex")
+        .classes("flex", "align-children")
         .children(...children);
 }

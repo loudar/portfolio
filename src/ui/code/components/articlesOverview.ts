@@ -13,7 +13,11 @@ export class ArticlesOverview {
             .finally(() => loading.value = false);
 
         return Generics.pageFrame(
-            Generics.link("/", "Home", "home"),
+            horizontal(
+                horizontal(
+                    Generics.link("/", "Home", "home"),
+                ).classes("sticky")
+            ).classes("top-links").build(),
             Generics.heading(1, "Articles"),
             when(loading, Generics.loading()),
             signalMap(articles$, vertical(), (article) => {
