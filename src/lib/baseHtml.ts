@@ -1,7 +1,7 @@
 export async function baseHtml(req: Request, hitsData: Record<string, number>, title?: string, description?: string, image?: string) {
     const hits = Object.values(hitsData).reduce((a, b) => a + b, 0);
     const siteName = process.env.SITE_NAME || "Portfolio";
-    const displayTitle = title ? `${title} | ${siteName}` : siteName;
+    const displayTitle = title ?? siteName;
     const displayDescription = description || process.env.SITE_DESCRIPTION || siteName;
     
     const url = new URL(req.url);
