@@ -107,7 +107,24 @@ And because compensating artists fairly is important, a new music service should
 Bandcamp and other platforms encourage artists to set up a merch store, which I don't think is bad.
 It just shouldn't be the thing you go to for money because the actual core experience (the music) isn't compensated properly.
 
-TODO: dive into pro rata / actual fair pay comparison
+### Fan-centric vs. pro rata
+
+When it comes to streaming payouts, the current standard model is the [pro rata model](https://www.sounds.co/en/post/royalties-streaming-pro-rata-model).
+For music streaming specifically, this means that if 10 people pay $10 a month, then the service takes its 30% and these 10 people stream songs 10,000 times, every stream is equally worth 0.7ct.
+This might sound fair at first glance, but let's look at an example:
+
+Not every person streams the same amount per month. Imagine Bob and Alice, both paying $10/m, summed up to $14/m after service cut.
+If Bob listens 1000 times a month and Alice only 50 times, the artists Bob listens to would get money that Alice is paying, essentially subsidising Bob's streams.
+Say Bob listened to only [Skrillex](https://en.wikipedia.org/wiki/Skrillex) and Alice only to [A.G. Cook](https://en.wikipedia.org/wiki/A._G._Cook), Skrillex would get $13.33 and A.G. Cook would get $0.66.
+
+Now if we had a fan-centric payment model, Skrillex would get $7 and A.G. Cook would get $7.
+Just because Alice listens less in general, that doesn't mean her money should go to what other people listen to, right?  
+
+[Jack Stratton](https://en.wikipedia.org/wiki/Jack_Stratton_(musician)) from [Vulfpeck](https://en.wikipedia.org/wiki/Vulfpeck) (an amazing band btw!) explained this beautifully in [this video](https://www.youtube.com/watch?v=RJBwI3tAmio).
+He urges Apple Music to only take a 10% cut and also switch to the fan-centric model.
+It would benefit both labels and artists, as labels get more in general (bump from 70% to 90%) and especially artists would be getting money from the people that actually listen to them.
+
+That's why I'm using the fan-centric payout for the music service I'm making. I can't make any guarantees on the service cut, but for now it'll be 10%.
 
 ## Accepting from distributors
 
