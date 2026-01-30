@@ -7,11 +7,23 @@ The music industry is a disaster in a way:
 
 ### Subcategory Spotify
 
-It is actually somewhat surprising how many scandals a company can have within the span of a couple years, so I've decided to list every Spotify-related problem separately:
+It is actually somewhat surprising how many scandals a company can have within the span of a couple of years, so I've decided to list every Spotify-related problem separately:
 - Spotify pushing artists to make profit-oriented music [>11](https://www.theguardian.com/commentisfree/2025/mar/09/spotify-algorithm-artists-music-musicians-money-songs-playlists)
 - Spotify founder Daniel Ek funding a defense startup with $700 million [>12](https://www.cnbc.com/2025/06/17/spotifys-daniel-ek-leads-investment-in-defense-startup-helsing.html)
 - Spotify launching an AI DJ that nobody has asked for [>13](https://www.bgr.com/tech/spotifys-ai-dj-will-talk-to-you-while-it-plays-your-favorite-songs/) [>14](https://x.com/kitten_beloved/status/1782456830050144678) [>15](https://x.com/zachbdunn/status/1720126876805697901)
 - Spotify not paying artists for a track if it doesn't reach 1000 streams [>16](https://www.musicinafrica.net/magazine/spotifys-1000-stream-threshold-criticised-southeast-european-indie-labels)
+
+## Why something new?
+
+Even though the market feels very saturated and there are a lot of different platforms solving very different problems, the main thing missing is a combination of the benefits and transparency.
+It should be clear how royalties are distributed and how the business operates.
+And although I'm a fan of decentralized technologies and offline-first, music streaming is such a nice user experience that I wouldn't wanna give it up as a listener myself.
+And unfortunately, it's just so much easier (especially for non-tech people) to use than setting up a media server yourself.
+
+This is why I started building [Lyda](https://lyda.app) in 2021.
+I've come a long way and thought this would be much easier at first.
+
+Here are some of the things I've learned and observed through my experience with the music industry as both a listener and an [artist](https://trirecords.eu/artist/loudar) and why I'm making a certain choice for Lyda.
 
 ## Understanding listeners
 
@@ -46,6 +58,9 @@ Either your label or you have to upload everything again there so people can buy
 
 In some cases, distributors also don't cover platforms like Soundcloud, so you have to upload it separately there as well.
 
+That's why I'm creating ways on Lyda to efficiently import your existing discography or create new releases.
+You can import a JSON with your metadata on the upload page and I'm planning to build an "Import discography" feature, at least for the metadata. 
+
 ### 2. Marketing
 
 Once the music is available on platforms, most artists want as many people as possible to listen to it.
@@ -72,6 +87,15 @@ To do music marketing, there is a variety of options available:
 
 None of these are options that really let you focus on the music alone.
 
+**Feed me more of the same**
+
+A good way of solving this problem is a recommendation algorithm.
+The problem with most recommendation algorithms is that they can only show you music similar to what you've already listened to.
+They cannot reliably push you to discover new things of entirely different styles or genres unless they were made to do exactly that.
+
+This is why Lyda has an explore page not based on what you listen to, but rather by randomness.
+There are amazing artists everywhere, even if they're small, so they should be surfaced regularly.
+
 ### 3. Community
 
 Given the state of the currently available and established platforms, it is hard to build a community digitally.
@@ -80,6 +104,8 @@ You can have fans in dozens of different places, and it's basically impossible t
 SoundCloud, YouTube and Bandcamp all have an advantage over the others here because you're able to directly interact with the artist.
 Buying music on bandcamp is so much more likely to be seen by the artist and responded to than buying it on iTunes, for example (let alone just streaming it).
 SoundCloud and YouTube let you comment on the music, which deepens the possible relationship artists and fans can build over time.
+
+That's why Lyda has comments, reposts and a fine-grained notification system. I'll add more ways to make building communities easier in the long run.
 
 ## Required Features
 
@@ -115,19 +141,19 @@ This might sound fair at first glance, but let's look at an example:
 
 Not every person streams the same amount per month. Imagine Bob and Alice, both paying $10/m, summed up to $14/m after service cut.
 If Bob listens 1000 times a month and Alice only 50 times, the artists Bob listens to would get money that Alice is paying, essentially subsidising Bob's streams.
-Say Bob listened to only [Skrillex](https://en.wikipedia.org/wiki/Skrillex) and Alice only to [A.G. Cook](https://en.wikipedia.org/wiki/A._G._Cook), Skrillex would get $13.33 and A.G. Cook would get $0.66.
+Say Bob listened to only [Skrillex](https://en.wikipedia.org/wiki/Skrillex) and Alice only to [A.G. Cook](https://en.wikipedia.org/wiki/A._G._Cook), Skrillex would get **$13.33** and A.G. Cook would get **$0.66**.
 
-Now if we had a fan-centric payment model, Skrillex would get $7 and A.G. Cook would get $7.
+Now if we had a fan-centric payment model, Skrillex would get **$7** and A.G. Cook would get **$7**.
 Just because Alice listens less in general, that doesn't mean her money should go to what other people listen to, right?  
 
-[Jack Stratton](https://en.wikipedia.org/wiki/Jack_Stratton_(musician)) from [Vulfpeck](https://en.wikipedia.org/wiki/Vulfpeck) (an amazing band btw!) explained this beautifully in [this video](https://www.youtube.com/watch?v=RJBwI3tAmio).
+[Jack Stratton](https://en.wikipedia.org/wiki/Jack_Stratton_(musician)) from [Vulfpeck](https://en.wikipedia.org/wiki/Vulfpeck) explained this beautifully in [this video](https://www.youtube.com/watch?v=RJBwI3tAmio).
 He urges Apple Music to only take a 10% cut and also switch to the fan-centric model.
 It would benefit both labels and artists, as labels get more in general (bump from 70% to 90%) and especially artists would be getting money from the people that actually listen to them.
 
-That's why I'm using the fan-centric payout for the music service I'm making. I can't make any guarantees on the service cut, but for now it'll be 10%.
+That's why I'm using the fan-centric payout for the music service I'm making. I can't make any guarantees on the service cut for the future, but for the start it'll be 10%.
 
 ## Accepting from distributors
 
-If you want to get music from a distribution service like [Symphonic](https://symphonic.com/) for example, you have do implement the [DDEX standard](https://ddex.net/).
-The problem here is that the examples are "meh" at best and communicating with distributors without having an established presence as a music platform is not easy because their interest is in reaching as many listeners as possible.
+If you want to get music from a distribution service like [Symphonic](https://symphonic.com/) for example, you have to implement the [DDEX standard](https://ddex.net/).
+The problem here is that the examples are "meh" at best, and communicating with distributors without having an established presence as a music platform is not easy because their interest is in reaching as many listeners as possible.
 A small and up-and-coming platform with a couple hundred users will not be of much interest here.
