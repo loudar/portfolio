@@ -90,11 +90,14 @@ Too many different services lead to
 - different sets of features, so users don't know what to expect from each platform
 - switching is challenging because your amassed library does not cleanly transfer to another platform
 
+TODO: dive into user experience, broken platforms etc
+
 ## Fair p(l)ay
 
 As established in the problems section at the start of this article, musicians mostly aren't being paid fairly.
 It is primarily big record labels and very established artists profiting off the industry.
 And even though there are [efforts](https://www.bbc.com/news/articles/cr4wyy3xq5vo) being made, it is not enough to really change the core problem of the industry:
+
 Art is not seen with the same respect in our society that other jobs are.
 Of course, it's different from being a doctor saving lives. 
 However, if we don't have art to bring us together through shared cultural experiences and ways of building community, we will just die alone and hating everyone that doesn't share every single opinion we have.
