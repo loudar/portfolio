@@ -90,12 +90,21 @@ Too many different services lead to
 - different sets of features, so users don't know what to expect from each platform
 - switching is challenging because your amassed library does not cleanly transfer to another platform
 
+## Fair p(l)ay
+
+As established in the problems section at the start of this article, musicians mostly aren't being paid fairly.
+It is primarily big record labels and very established artists profiting off the industry.
 And even though there are [efforts](https://www.bbc.com/news/articles/cr4wyy3xq5vo) being made, it is not enough to really change the core problem of the industry:
 Art is not seen with the same respect in our society that other jobs are.
 Of course, it's different from being a doctor saving lives. 
 However, if we don't have art to bring us together through shared cultural experiences and ways of building community, we will just die alone and hating everyone that doesn't share every single opinion we have.
+So, art should be appreciated, not just as in "art is great and I love to experience a lot of it in my life" but also "I love to pay for it because it teaches me things and makes me question things and teaches me things and it makes me feel things".
 
+And because compensating artists fairly is important, a new music service should build this into its foundation and not treat it as an afterthought.
+Bandcamp and other platforms encourage artists to set up a merch store, which I don't think is bad.
+It just shouldn't be the thing you go to for money because the actual core experience (the music) isn't compensated properly.
 
+TODO: dive into pro rata / actual fair pay comparison
 
 ## Accepting from distributors
 
