@@ -49,7 +49,7 @@ const getMimeType = (filepath: string): string => {
     return MIME_TYPES[extension] || "text/plain";
 };
 
-const getArticleMetadata = (pathname: string): { title?: string, description?: string } => {
+const getArticleMetadata = (pathname: string): { title?: string, description?: string, image?: string } => {
     const dateId = path.basename(pathname);
     if (!/^\d{8}$/.test(dateId)) {
         return {};
@@ -65,6 +65,7 @@ const getArticleMetadata = (pathname: string): { title?: string, description?: s
     const lines = content.split("\n");
     let title: string | undefined;
     let description: string | undefined;
+    let image: string | undefined;
 
     const h1 = lines.find(l => l.startsWith("# "));
     if (h1) {
@@ -76,7 +77,15 @@ const getArticleMetadata = (pathname: string): { title?: string, description?: s
         description = firstParagraph.length > 160 ? firstParagraph.substring(0, 157) + "..." : firstParagraph;
     }
 
-    return { title, description };
+    const firstImage = lines.find(l => l.trim().startsWith("!["));
+    if (firstImage) {
+        const match = firstImage.match(/!\[.*?\]\((.*?)\)/);
+        if (match && match[1]) {
+            image = match[1].split(" ")[0]; // Remove title if present
+        }
+    }
+
+    return { title, description, image };
 };
 
 // Bun server handler
@@ -186,14 +195,16 @@ const server = serve({
             const hitsData = getHitsData();
             let title: string | undefined;
             let description: string | undefined;
+            let image: string | undefined;
 
             if (isDynamicArticlePath) {
                 const metadata = getArticleMetadata(pathname);
                 title = metadata.title;
                 description = metadata.description;
+                image = metadata.image;
             }
 
-            const html = await baseHtml(req, hitsData, title, description);
+            const html = await baseHtml(req, hitsData, title, description, image);
             if (isHit && !excludedIps.includes(ip) && !isDynamicArticlePath) {
                 const count = (ipRequestCount[ip] || 0) + 1;
                 if (count <= 10) {

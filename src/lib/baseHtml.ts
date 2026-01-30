@@ -1,8 +1,16 @@
-export async function baseHtml(req: Request, hitsData: Record<string, number>, title?: string, description?: string) {
+export async function baseHtml(req: Request, hitsData: Record<string, number>, title?: string, description?: string, image?: string) {
     const hits = Object.values(hitsData).reduce((a, b) => a + b, 0);
     const siteName = process.env.SITE_NAME || "Portfolio";
     const displayTitle = title ? `${title} | ${siteName}` : siteName;
     const displayDescription = description || process.env.SITE_DESCRIPTION || siteName;
+    
+    const url = new URL(req.url);
+    const origin = process.env.ORIGIN || `${url.protocol}//${url.host}`;
+    const displayUrl = `${origin}${url.pathname}`;
+    const displayImage = image ? (image.startsWith("http") ? image : `${origin}${image}`) : `${origin}/img/favicon.jpg`;
+
+    const isArticle = title !== undefined;
+    const ogType = isArticle ? "article" : "website";
 
     return `<!DOCTYPE html>
 <html lang="en">
@@ -34,9 +42,19 @@ export async function baseHtml(req: Request, hitsData: Record<string, number>, t
     <link rel="shortcut icon" href="/img/favicon.jpg">
 
     <!-- OG Tags -->
-    <meta property="og:type" content="website"/>
+    <meta property="og:type" content="${ogType}"/>
     <meta property="og:title" content="${displayTitle}"/>
     <meta property="og:description" content="${displayDescription}"/>
+    <meta property="og:url" content="${displayUrl}"/>
+    <meta property="og:image" content="${displayImage}"/>
+    <meta property="og:site_name" content="${siteName}"/>
+
+    <!-- Twitter Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${displayTitle}">
+    <meta name="twitter:description" content="${displayDescription}">
+    <meta name="twitter:image" content="${displayImage}">
+
     <meta property="hits" content="${hits}"/>
     <meta property="hits-data" content='${JSON.stringify(hitsData)}'/>
     <script src="/main.js" type="module"></script>
