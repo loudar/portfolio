@@ -7,7 +7,7 @@ export async function baseHtml(req: Request, hitsData: Record<string, number>, t
     const url = new URL(req.url);
     const origin = process.env.ORIGIN || `${url.protocol}//${url.host}`;
     const displayUrl = `${origin}${url.pathname}`;
-    const displayImage = image ? (image.startsWith("http") ? image : `${origin}${image}`) : `${origin}/img/favicon.jpg`;
+    const displayImage = image ? (image.startsWith("http") ? image : `${origin}${image}`) : ``;
 
     const isArticle = title !== undefined;
     const ogType = isArticle ? "article" : "website";
