@@ -49,6 +49,36 @@ const getMimeType = (filepath: string): string => {
     return MIME_TYPES[extension] || "text/plain";
 };
 
+const getArticleMetadata = (pathname: string): { title?: string, description?: string } => {
+    const dateId = path.basename(pathname);
+    if (!/^\d{8}$/.test(dateId)) {
+        return {};
+    }
+
+    const files = fs.readdirSync(articlesDir);
+    const fileName = files.find(f => f.startsWith(dateId) && f.endsWith(".md") && !f.endsWith(".draft.md"));
+    if (!fileName) {
+        return {};
+    }
+
+    const content = fs.readFileSync(path.join(articlesDir, fileName), "utf-8");
+    const lines = content.split("\n");
+    let title: string | undefined;
+    let description: string | undefined;
+
+    const h1 = lines.find(l => l.startsWith("# "));
+    if (h1) {
+        title = h1.replace("# ", "").trim();
+    }
+
+    const firstParagraph = lines.find(l => l.trim().length > 0 && !l.startsWith("#") && !l.startsWith("!["))?.trim();
+    if (firstParagraph) {
+        description = firstParagraph.length > 160 ? firstParagraph.substring(0, 157) + "..." : firstParagraph;
+    }
+
+    return { title, description };
+};
+
 // Bun server handler
 const server = serve({
     port: parseInt(process.env.PORT || "3000"),
@@ -154,13 +184,30 @@ const server = serve({
         // Handle dynamic routes (fallback to baseHtml render)
         try {
             const hitsData = getHitsData();
-            const html = await baseHtml(req, hitsData);
-            if (isHit && !excludedIps.includes(ip)) {
+            let title: string | undefined;
+            let description: string | undefined;
+
+            if (isDynamicArticlePath) {
+                const metadata = getArticleMetadata(pathname);
+                title = metadata.title;
+                description = metadata.description;
+            }
+
+            const html = await baseHtml(req, hitsData, title, description);
+            if (isHit && !excludedIps.includes(ip) && !isDynamicArticlePath) {
                 const count = (ipRequestCount[ip] || 0) + 1;
                 if (count <= 10) {
                     addHit().then(() => console.log(`+HIT\t[${req.method}] ${req.url}\t${ip}\t${userAgent}\t(Hits: ${count})`));
                 } else {
                     console.log(`NOHIT (limit reached)\t[${req.method}] ${req.url}\t${ip}\t${userAgent}`);
+                }
+                ipRequestCount[ip] = count;
+            } else if (isHit && !excludedIps.includes(ip) && isDynamicArticlePath) {
+                // For articles, we already identified it as a hit, but let's make sure we log it correctly
+                // We don't want to double count, but server.ts structure is a bit messy with isHit
+                const count = (ipRequestCount[ip] || 0) + 1;
+                if (count <= 10) {
+                    addHit().then(() => console.log(`+HIT (Article)\t[${req.method}] ${req.url}\t${ip}\t${userAgent}\t(Hits: ${count})`));
                 }
                 ipRequestCount[ip] = count;
             }
