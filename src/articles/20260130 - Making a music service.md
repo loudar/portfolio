@@ -116,7 +116,12 @@ Too many different services lead to
 - different sets of features, so users don't know what to expect from each platform
 - switching is challenging because your amassed library does not cleanly transfer to another platform
 
-TODO: dive into user experience, broken platforms etc
+It might seem strange at first to create [yet another service](https://xkcd.com/927/) to try to solve this.
+But as with many systems, if reform seems impossible, a replacement is often easier to make.
+
+The core focus should be transparency, listening to both users and artists and actually working for the people, not the money.
+For trying to keep the platform as human as possible, AI-generated music should be banned.
+Although automatic detection is not 100% reliable, it can be used in combination with other factors, like community reporting features or general checks outside only the uploaded sound.
 
 ## Fair p(l)ay
 
@@ -156,4 +161,14 @@ That's why I'm using the fan-centric payout for the music service I'm making. I 
 
 If you want to get music from a distribution service like [Symphonic](https://symphonic.com/) for example, you have to implement the [DDEX standard](https://ddex.net/).
 The problem here is that the examples are "meh" at best, and communicating with distributors without having an established presence as a music platform is not easy because their interest is in reaching as many listeners as possible.
-A small and up-and-coming platform with a couple hundred users will not be of much interest here.
+A small and up-and-coming platform with a few hundred users will not be of much interest here.
+
+This is why an early focus must be on producers and smaller artists, building a community of people that are interested in sharing music with each other.
+Lyda is not dependent on distribution services because artists can just upload their music directly.
+
+## Conclusion
+
+Making a good music service is hard. This article is far from telling you everything, but it's made to be a (hopefully) comprehensive overview of the industry and what could be done to improve it.
+
+If you're curious about Lyda and want to use it, you can just make an account and try it out! If you subscribe, the first month is free.
+https://lyda.app
