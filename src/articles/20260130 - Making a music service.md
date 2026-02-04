@@ -170,5 +170,7 @@ Lyda is not dependent on distribution services because artists can just upload t
 
 Making a good music service is hard. This article is far from telling you everything, but it's made to be a (hopefully) comprehensive overview of the industry and what could be done to improve it.
 
-If you're curious about Lyda and want to use it, you can just make an account and try it out! If you subscribe, the first month is free.
-https://lyda.app
+If you also want a better music industry, please check out [Lyda](https://lyda.app) and [let me know](https://illegal.trading/) (choose the contact method of your choice) how the platform could be improved.
+I want everyone to win – both artists *and* listeners.
+
+In case that you like Discord as a medium, here's an invite to the Discord server for Lyda: https://discord.gg/QjtuATcJXu
