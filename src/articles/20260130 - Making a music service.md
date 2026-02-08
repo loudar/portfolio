@@ -173,4 +173,4 @@ Making a good music service is hard. This article is far from telling you everyt
 If you also want a better music industry, please check out [Lyda](https://lyda.app) and [let me know](https://illegal.trading/) (choose the contact method of your choice) how the platform could be improved.
 I want everyone to win – both artists *and* listeners.
 
-In case that you like Discord as a medium, here's an invite to the Discord server for Lyda: https://discord.gg/QjtuATcJXu
+In case that you like Discord as a medium, here's an invite to the Discord server for Lyda: [Click me](https://discord.gg/QjtuATcJXu)
