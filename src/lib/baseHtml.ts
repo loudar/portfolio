@@ -39,7 +39,7 @@ export async function baseHtml(req: Request, hitsData: Record<string, number>, t
     <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/an-old-hope.min.css" rel="stylesheet">
     
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/img/favicon.jpg">
+    <link rel="shortcut icon" href="/img/favicon.png">
 
     <!-- OG Tags -->
     <meta property="og:type" content="${ogType}"/>
