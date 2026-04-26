@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://codeberg.org/LunarEclipse/well-known-button/raw/branch/main/drafts/draft-filmroellchen-lunar-well-known-button-00.schema.json",
+  "title": ".well-known 88x31 Button JSON Schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "title": "The URI of the schema used by this document.",
+      "type": "string",
+      "format": "uri"
+    },
+    "default": {
+      "title": "The id of the button to use as the default.",
+      "type": "string"
+    },
+    "buttons": {
+      "type": "array",
+      "items": {
+        "title": "An 88x31 button available from the website",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "The ID of the button",
+            "type": "string"
+          },
+          "uri": {
+            "title": "The canonical uri of the image file",
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "alt": {
+            "title": "Alt text for the image",
+            "type": "string"
+          },
+          "caption": {
+            "title": "Image caption or title",
+            "type": "string"
+          },
+          "link": {
+            "title": "Where the image should link to if used on another website",
+            "type": "string",
+            "format": "uri"
+          },
+          "hotlink": {
+            "title": "Whether image should be hotlinked",
+            "type": "boolean",
+            "default": false
+          },
+          "sha256": {
+            "title": "SHA256 hash of the current version of the image file",
+            "type": "string",
+            "format": "regex",
+            "pattern": "^[A-Fa-f0-9]{64}$"
+          },
+          "license": {
+            "title": "SPDX license expression specifying the license for the image file",
+            "type": "string"
+          },
+          "licenseText": {
+            "title": "Additional license information to augment the license field",
+            "type": "string"
+          },
+          "groupId": {
+            "title": "A group of interchangeable versions of a button with different accessibility properties",
+            "type": "string"
+          },
+          "colorScheme": {
+            "title": "What color scheme does this button version match",
+            "type": "string",
+            "enum": [
+              "light",
+              "dark",
+              "other"
+            ],
+            "default": "other"
+          },
+          "animations": {
+            "title": "Whether this button version is animated, and to what degree",
+            "type": "string",
+            "enum": [
+              "none",
+              "minimal",
+              "high"
+            ]
+          },
+          "contrast": {
+            "title": "The contrast level of this button version",
+            "type": "string",
+            "enum": [
+              "standard",
+              "more",
+              "less"
+            ],
+            "default": "standard"
+          },
+          "imageRendering": {
+            "title": "Image rendering algorithm",
+            "description": "Which scaling algorithm to use for the image if it is not displayed at native resolution, recommended: 'smooth', 'auto' or 'pixelated'",
+            "type": "string",
+            "default": "auto"
+          }
+        },
+        "required": [
+          "id",
+          "uri",
+          "alt"
+        ]
+      }
+    }
+  },
+  "required": [
+    "$schema",
+    "buttons"
+  ]
+}

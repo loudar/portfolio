@@ -5,6 +5,7 @@ import * as path from "path";
 import {MIME_TYPES} from "./MIME_TYPES.ts";
 import {getHitsData, addHit, logUnknownRequest, requestsCsvPath} from "./metrics";
 import * as fs from "node:fs";
+import {handleButtonsJson} from "./wellKnownButtons";
 
 config();
 
@@ -97,6 +98,10 @@ const server = serve({
 
         const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "unknown";
         const userAgent = req.headers.get("user-agent")?.trim() || "unknown";
+
+        if (pathname === "/.well-known/buttons.json") {
+            return handleButtonsJson();
+        }
 
         if (pathname === "/api/articles") {
             const files = fs.readdirSync(articlesDir);
