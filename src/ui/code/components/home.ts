@@ -181,7 +181,13 @@ export class Home {
                 Generics.webbutton("wbtn2/no.gif", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"),
                 Generics.webbutton("wbtn2/transnow2.gif"),
                 Generics.webbutton("wbtn2/www.gif", "https://wikiroulette.co/"),
-            )
+            ),
+            Generics.heading(2, "Webring"),
+            horizontal(
+                Generics.link("https://melon-ring.pathetic.systems/loudar/previous", "◀"),
+                Generics.link("https://melon-ring.pathetic.systems", "melon-ring"),
+                Generics.link("https://melon-ring.pathetic.systems/loudar/next", "▶")
+            ),
         );
     }
 
