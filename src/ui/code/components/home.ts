@@ -184,9 +184,9 @@ export class Home {
             ),
             Generics.heading(2, "Webring"),
             horizontal(
-                Generics.link("https://melon-ring.pathetic.systems/loudar/previous", "◀"),
+                Generics.link("https://melon-ring.pathetic.systems/loudar/previous", "◀", undefined, undefined, "_self"),
                 Generics.link("https://melon-ring.pathetic.systems", "melon-ring"),
-                Generics.link("https://melon-ring.pathetic.systems/loudar/next", "▶")
+                Generics.link("https://melon-ring.pathetic.systems/loudar/next", "▶", undefined, undefined, "_self")
             ),
         );
     }

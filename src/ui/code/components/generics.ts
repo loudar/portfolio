@@ -162,7 +162,7 @@ export class Generics {
             .build();
     }
 
-    static link(url: StringOrSignal, title: StringOrSignal, icon?: StringOrSignal, iconPosition: "right" | "left" = "right") {
+    static link(url: StringOrSignal, title: StringOrSignal, icon?: StringOrSignal, iconPosition: "right" | "left" = "right", overrideTarget: string | null = null) {
         let isRemote = false;
         if (typeof url === "string") {
             isRemote = url.includes(":");
@@ -173,7 +173,7 @@ export class Generics {
         return create("a")
             .classes("link-container", "flex", "align-children", "small-gap")
             .href(url)
-            .target(isRemote ? "_blank" : "_self")
+            .target(overrideTarget ?? (isRemote ? "_blank" : "_self"))
             .onclick(e => {
                 if (!isRemote && e.button === 0) {
                     e.preventDefault();
