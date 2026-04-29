@@ -99,7 +99,7 @@ const server = serve({
         const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "unknown";
         const userAgent = req.headers.get("user-agent")?.trim() || "unknown";
 
-        if (pathname === "/.well-known/buttons.json") {
+        if (pathname === "/.well-known/buttons.json" || pathname === "/.well-known/button.json") {
             return handleButtonsJson();
         }
 
